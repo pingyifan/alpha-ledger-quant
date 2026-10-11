@@ -35,9 +35,27 @@ MIN_HISTORY_DAYS = 250                # a symbol needs this many bars to be scor
 MIN_PRICE = 5.0                       # last raw close, USD
 MIN_ADV_USD = 5_000_000               # 20-day average dollar volume
 
-# --- label: next session's open-to-close return, the Alpha Ledger's scoring rule -
-LABEL_EXPR = "Ref($close, -1)/Ref($open, -1) - 1"
+# --- models: one per horizon. Every label is measured from the NEXT session, i.e. what a
+# call made before that session's open can capture. "oc" is the Alpha Ledger's scoring rule.
 LABEL_NAME = "LABEL0"
+MODELS = {
+    "oc": {
+        "label": "Ref($close, -1)/Ref($open, -1) - 1",
+        "desc": "next session open-to-close (the ledger's day-trade rule)",
+        "entry": "next open", "exit": "same session close",
+        "scores_file": "scores_latest.csv", "card_file": "model_card.json",
+        "oos_file": "oos_report", "history_file": "scores_history_top.csv",
+    },
+    "oo": {
+        "label": "Ref($open, -2)/Ref($open, -1) - 1",
+        "desc": "next session open to the following session's open (one-session hold, includes the overnight)",
+        "entry": "next open", "exit": "following session open",
+        "scores_file": "scores_oo_latest.csv", "card_file": "model_card_oo.json",
+        "oos_file": "oos_report_oo", "history_file": "scores_history_top_oo.csv",
+    },
+}
+DEFAULT_MODEL = "oc"
+LABEL_EXPR = MODELS[DEFAULT_MODEL]["label"]   # kept for backward compatibility
 
 # --- walk-forward split -----------------------------------------------------------
 VALID_DAYS = 252                      # last year of complete sessions = validation
@@ -45,23 +63,25 @@ VALID_DAYS = 252                      # last year of complete sessions = validat
 # the final model is refit on train+valid with the early-stopped round count
 
 # --- LightGBM (Qlib LGBModel kwargs) -----------------------------------------------
+# Daily cross-sectional targets are mostly noise, so the model is regularised hard: slow
+# learning rate, shallow trees, large leaves, strong L2. Early stopping picks the rounds.
 LGB_PARAMS = {
     "loss": "mse",
-    "learning_rate": 0.05,
-    "num_leaves": 63,
-    "max_depth": 8,
-    "feature_fraction": 0.8,
-    "bagging_fraction": 0.8,
+    "learning_rate": 0.02,
+    "num_leaves": 31,
+    "max_depth": 6,
+    "feature_fraction": 0.6,
+    "bagging_fraction": 0.7,
     "bagging_freq": 1,
-    "lambda_l1": 10.0,
-    "lambda_l2": 100.0,
-    "min_data_in_leaf": 200,
+    "lambda_l1": 50.0,
+    "lambda_l2": 300.0,
+    "min_data_in_leaf": 500,
     "num_threads": max(1, os.cpu_count() or 1),
     "seed": 2026,
     "verbosity": -1,
 }
-NUM_BOOST_ROUND = 1500
-EARLY_STOPPING_ROUNDS = 100
+NUM_BOOST_ROUND = 3000
+EARLY_STOPPING_ROUNDS = 200
 
 # --- costs used in every open-to-close simulation (matches the ledger's fund) ------
 COST_PER_SIDE = 0.0002                # 2 bps at the open + 2 bps at the close

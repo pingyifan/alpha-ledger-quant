@@ -56,11 +56,13 @@ def score_latest(res: TrainResult, universe: pd.DataFrame) -> pd.DataFrame:
     df.loc[trad, "rank_pct"] = 1 - (df.loc[trad, "rank"] - 1) / max(n_trad - 1, 1)
     df.loc[trad, "decile"] = np.ceil(df.loc[trad, "rank_pct"].clip(1e-9, 1) * 10).clip(1, 10)
     df["asof_date"] = end.strftime("%Y-%m-%d")
+    df["model"] = res.key
+    df["horizon"] = res.spec["desc"]
     df = df.rename(columns={"raw_close": "close"})
     df["close"] = df["close"].round(4)
     df["adv20_usd"] = df["adv20_usd"].round(0)
     df["score"] = df["score"].round(6)
-    cols = ["asof_date", "ticker", "name", "sector", "index", "score", "rank", "rank_pct", "decile",
+    cols = ["asof_date", "model", "horizon", "ticker", "name", "sector", "index", "score", "rank", "rank_pct", "decile",
             "close", "adv20_usd", "tradable"]
     df = df[cols].sort_values(["tradable", "score"], ascending=[False, False]).reset_index(drop=True)
     df["rank"] = df["rank"].astype("Int64")
@@ -69,15 +71,16 @@ def score_latest(res: TrainResult, universe: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def write_scores(df: pd.DataFrame) -> dict:
+def write_scores(df: pd.DataFrame, key: str = config.DEFAULT_MODEL) -> dict:
+    spec = config.MODELS[key]
     config.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    df.to_csv(config.OUTPUT_DIR / "scores_latest.csv", index=False)
+    df.to_csv(config.OUTPUT_DIR / spec["scores_file"], index=False)
     asof = df["asof_date"].iloc[0]
     trad = df[df["tradable"]]
     top = trad.head(config.HISTORY_TOP_N).assign(side="top")
     bottom = trad.tail(config.HISTORY_TOP_N).assign(side="bottom")
     new_rows = pd.concat([top, bottom])[["asof_date", "ticker", "side", "rank", "score", "close"]]
-    hist_path = config.OUTPUT_DIR / "scores_history_top.csv"
+    hist_path = config.OUTPUT_DIR / spec["history_file"]
     hist = new_rows
     if hist_path.exists():
         prev = pd.read_csv(hist_path)
@@ -88,6 +91,7 @@ def write_scores(df: pd.DataFrame) -> dict:
     hist = hist[hist["asof_date"].isin(keep_dates)].sort_values(["asof_date", "side", "rank"])
     hist.to_csv(hist_path, index=False)
     return {
+        "model": key,
         "asof_date": asof,
         "n_scored": int(len(df)),
         "n_tradable": int(df["tradable"].sum()),

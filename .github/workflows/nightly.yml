@@ -60,11 +60,21 @@ jobs:
             git push origin HEAD:${GITHUB_REF_NAME}
           fi
 
-      - name: Pack the price panel (for offline research, 2 days)
+      - name: Pack the price panel (for offline research)
         if: always()
         run: |
           if [ -d data/csv ]; then tar -czf panel.tar.gz -C data csv aux download_meta.json 2>/dev/null || tar -czf panel.tar.gz -C data csv; fi
           ls -la panel.tar.gz 2>/dev/null || echo "no panel"
+
+      - name: Publish the panel as the rolling "panel" release asset
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -f panel.tar.gz ]; then
+            gh release view panel >/dev/null 2>&1 || gh release create panel --title "Price panel (rolling)" --notes "Adjusted daily bars in Qlib dump_bin CSV format, replaced by every run. Research input only." --latest=false
+            gh release upload panel panel.tar.gz --clobber
+          fi
 
       - name: Upload run logs and panel
         if: always()

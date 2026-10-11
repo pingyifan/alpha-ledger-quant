@@ -23,6 +23,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--steps", default=",".join(ALL_STEPS))
     ap.add_argument("--synthetic", type=int, default=0, help="generate N synthetic tickers instead of downloading")
+    ap.add_argument("--models", default="", help="comma-separated model keys from config.MODELS (default: all)")
     args = ap.parse_args(argv)
     steps = [s.strip() for s in args.steps.split(",") if s.strip()]
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname)s %(message)s")
@@ -63,28 +64,33 @@ def main(argv: list[str] | None = None) -> int:
     if "bin" in steps and status["ok"]:
         from .make_qlib_data import build_qlib_dir
         run("bin", build_qlib_dir)
-    if "train" in steps and status["ok"]:
-        from .train import train, write_model_card
+    model_keys = [k for k in (args.models.split(",") if args.models else config.MODELS) if k in config.MODELS]
+    ctx["res"] = {}
+    for key in model_keys:
+        if "train" in steps and status["ok"]:
+            from .train import train, write_model_card
 
-        def _train():
-            ctx["res"] = train()
-            write_model_card(ctx["res"])
-            return {"dates": ctx["res"].dates, "best_iteration": ctx["res"].best_iteration, "validation": ctx["res"].valid_metrics}
-        run("train", _train)
-    if "score" in steps and status["ok"] and "res" in ctx:
-        from .score import score_latest, write_scores
-        from .universe import load_universe
-        run("score", lambda: write_scores(score_latest(ctx["res"], load_universe())))
-    if "evaluate" in steps and "res" in ctx:
-        from .evaluate import evaluate
-        run("evaluate", lambda: {k: evaluate(ctx["res"]).get(k) for k in ("window", "signal", "name_day_hit_rates")})
+            def _train(key=key):
+                res = train(key)
+                ctx["res"][key] = res
+                write_model_card(res)
+                return {"dates": res.dates, "best_iteration": res.best_iteration, "validation": res.valid_metrics}
+            run(f"train:{key}", _train)
+        if "score" in steps and status["ok"] and key in ctx["res"]:
+            from .score import score_latest, write_scores
+            from .universe import load_universe
+            run(f"score:{key}", lambda key=key: write_scores(score_latest(ctx["res"][key], load_universe()), key))
+        if "evaluate" in steps and key in ctx["res"]:
+            from .evaluate import evaluate
+            run(f"evaluate:{key}", lambda key=key: {k: evaluate(ctx["res"][key]).get(k) for k in ("window", "signal", "name_day_hit_rates")})
     if "priors" in steps:
         from .priors import run_priors
         run("priors", lambda: {k: run_priors().get(k) for k in ("panel", "verdicts")})
 
     status["finished_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     try:
-        status["data_end_date"] = (config.OUTPUT_DIR / "scores_latest.csv").read_text().splitlines()[1].split(",")[0]
+        status["data_end_date"] = (config.OUTPUT_DIR / config.MODELS[config.DEFAULT_MODEL]["scores_file"]).read_text().splitlines()[1].split(",")[0]
+        status["models"] = {k: {"validation": ctx["res"][k].valid_metrics, "best_iteration": ctx["res"][k].best_iteration} for k in ctx["res"]}
     except Exception:  # noqa: BLE001
         pass
     (config.OUTPUT_DIR / "status.json").write_text(json.dumps(status, indent=2, default=str))

@@ -43,15 +43,17 @@ def calendar() -> pd.DatetimeIndex:
     return pd.DatetimeIndex(D.calendar(freq="day"))
 
 
-def make_handler(start_time, end_time, fit_start_time, fit_end_time):
-    """Alpha158 features with the label replaced by next session's open-to-close return."""
+def make_handler(start_time, end_time, fit_start_time, fit_end_time, label_expr: str | None = None):
+    """Alpha158 features with the label replaced by the model's horizon (default: next session open-to-close)."""
     from qlib.contrib.data.handler import Alpha158
 
-    class Alpha158OC(Alpha158):
-        def get_label_config(self):
-            return [config.LABEL_EXPR], [config.LABEL_NAME]
+    expr = label_expr or config.LABEL_EXPR
 
-    return Alpha158OC(
+    class Alpha158Horizon(Alpha158):
+        def get_label_config(self):
+            return [expr], [config.LABEL_NAME]
+
+    return Alpha158Horizon(
         instruments=config.MARKET_NAME,
         start_time=start_time,
         end_time=end_time,

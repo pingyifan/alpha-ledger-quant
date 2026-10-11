@@ -92,9 +92,9 @@ def evaluate(res: TrainResult) -> dict:
         "top5_long_bottom5_short": 0.5 * (d["top5"] - d["bot5"]) - cost_rt,
         "universe_equal_weight_long": d["universe_ew"] - cost_rt,
     }
-    spy = _spy_oc(start, end)
+    spy = _spy_series(res.spec["label"], start, end)
     if spy is not None:
-        sims["spy_open_to_close"] = spy.reindex(d.index) - cost_rt
+        sims["spy_same_horizon"] = spy.reindex(d.index) - cost_rt
 
     ic = df.groupby(level="datetime").apply(lambda g: g["score"].corr(g["label"]))
     ric = df.groupby(level="datetime").apply(lambda g: g["score"].corr(g["label"], method="spearman"))
@@ -125,19 +125,22 @@ def evaluate(res: TrainResult) -> dict:
         log.warning("qlib portfolio backtest skipped: %s", exc)
         report["qlib_topk_backtest_close_to_close"] = {"error": str(exc)[:300]}
 
+    report["model_key"] = res.key
+    report["horizon"] = res.spec["desc"]
     config.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    (config.OUTPUT_DIR / "oos_report.json").write_text(json.dumps(report, indent=2, default=str))
-    (config.OUTPUT_DIR / "oos_report.md").write_text(render_oos_markdown(report))
+    stem = res.spec["oos_file"]
+    (config.OUTPUT_DIR / f"{stem}.json").write_text(json.dumps(report, indent=2, default=str))
+    (config.OUTPUT_DIR / f"{stem}.md").write_text(render_oos_markdown(report))
     return report
 
 
-def _spy_oc(start, end) -> pd.Series | None:
+def _spy_series(label_expr: str, start, end) -> pd.Series | None:
     from qlib.data import D
 
     try:
-        s = D.features(["SPY"], ["Ref($close, -1)/Ref($open, -1) - 1"], start_time=start, end_time=end, freq="day")
+        s = D.features(["SPY"], [label_expr], start_time=start, end_time=end, freq="day")
         s = s.droplevel("instrument").iloc[:, 0]
-        s.name = "spy_oc_next"
+        s.name = "spy_same_horizon"
         return s
     except Exception as exc:  # noqa: BLE001
         log.warning("SPY series unavailable: %s", exc)
@@ -183,9 +186,10 @@ def render_oos_markdown(r: dict) -> str:
         return f"# Out-of-sample report\n\n{r['error']}\n"
     w, s, h = r["window"], r["signal"], r["name_day_hit_rates"]
     lines = [
-        "# Out-of-sample report (validation year, model never trained on these sessions)",
+        f"# Out-of-sample report: model `{r.get('model_key','oc')}` ({r.get('horizon','next session open-to-close')})",
         "",
-        f"Window {w['start']} to {w['end']}, {w['sessions']} sessions. Target = next session open-to-close return. "
+        "Validation year; the model never trained on these sessions. "
+        f"Window {w['start']} to {w['end']}, {w['sessions']} sessions. Target = {r.get('horizon','next session open-to-close')} return. "
         f"Costs = {r['cost_round_trip']*1e4:.0f} bps round trip, the same as the ledger's simulated fund.",
         "",
         "## Signal quality",
@@ -202,13 +206,13 @@ def render_oos_markdown(r: dict) -> str:
         "## Name-day hit rates (compare with the ledger's hit rate)",
         "",
         "| Basket | Hit rate |", "|---|---|",
-        f"| Top-5 longs, share that closed above the open | {h['top5_long_hit_rate']:.1%} |",
-        f"| Bottom-5 shorts, share that closed below the open | {h['bottom5_short_hit_rate']:.1%} |",
+        f"| Top-5 longs, share with a positive horizon return | {h['top5_long_hit_rate']:.1%} |",
+        f"| Bottom-5 shorts, share with a negative horizon return | {h['bottom5_short_hit_rate']:.1%} |",
         f"| Top decile longs | {h['top_decile_long_hit_rate']:.1%} |",
         f"| Bottom decile shorts | {h['bottom_decile_short_hit_rate']:.1%} |",
-        f"| Base rate: all tradable names that closed above the open | {h['universe_up_share']:.1%} |",
+        f"| Base rate: all tradable names with a positive horizon return | {h['universe_up_share']:.1%} |",
         "",
-        "## Open-to-close simulations, net of costs (per $1 of gross exposure)",
+        "## Horizon-return simulations, net of costs (per $1 of gross exposure)",
         "",
         "| Simulation | Days | Mean/day (bps) | Annualized | Sharpe | Hit days | Max DD | t |",
         "|---|---|---|---|---|---|---|---|",
