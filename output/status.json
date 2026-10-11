@@ -1,18 +1,18 @@
 {
-  "started_at": "2026-10-11T20:11:47+00:00",
+  "started_at": "2026-10-11T20:25:43+00:00",
   "steps": {
     "universe": {
       "ok": true,
-      "seconds": 0.3,
+      "seconds": 0.5,
       "info": {
         "tickers": 906
       }
     },
     "download": {
       "ok": true,
-      "seconds": 105.9,
+      "seconds": 139.6,
       "info": {
-        "downloaded_at": "2026-10-11T20:13:32+00:00",
+        "downloaded_at": "2026-10-11T20:28:01+00:00",
         "start": "2016-01-01",
         "requested": 907,
         "written": 905,
@@ -24,121 +24,9 @@
         },
         "missing_n": 0
       }
-    },
-    "bin": {
-      "ok": true,
-      "seconds": 19.7,
-      "info": {
-        "csv_files": 905,
-        "instruments_all": 905,
-        "instruments_stocks": 902,
-        "calendar_start": "2016-01-04",
-        "calendar_end": "2026-10-09",
-        "calendar_days": 2708
-      }
-    },
-    "train": {
-      "ok": true,
-      "seconds": 130.2,
-      "info": {
-        "dates": {
-          "start": "2016-01-01",
-          "train_end": "2025-10-07",
-          "valid_start": "2025-10-08",
-          "valid_end": "2026-10-08",
-          "end": "2026-10-09"
-        },
-        "best_iteration": 8,
-        "validation": {
-          "days": 252,
-          "ic_mean": 0.00357,
-          "ic_std": 0.13525,
-          "icir": 0.0264,
-          "rank_ic_mean": -0.00128,
-          "rank_icir": -0.011,
-          "ic_positive_days": 0.5278,
-          "best_iteration": 8,
-          "train_l2": 0.9881013525759316,
-          "valid_l2": 1.0003522427427862
-        }
-      }
-    },
-    "score": {
-      "ok": true,
-      "seconds": 4.3,
-      "info": {
-        "asof_date": "2026-10-09",
-        "n_scored": 902,
-        "n_tradable": 898,
-        "top5": [
-          "VICR",
-          "HIMS",
-          "DDOG",
-          "CNH",
-          "PLNT"
-        ],
-        "bottom5": [
-          "FICO",
-          "HUM",
-          "OKTA",
-          "PLTR",
-          "HPE"
-        ]
-      }
-    },
-    "evaluate": {
-      "ok": true,
-      "seconds": 22.6,
-      "info": {
-        "window": {
-          "start": "2025-10-08",
-          "end": "2026-10-08",
-          "sessions": 252
-        },
-        "signal": {
-          "ic_mean": 0.00357,
-          "icir": 0.0264,
-          "rank_ic_mean": -0.00128,
-          "rank_icir": -0.011,
-          "ic_positive_days": 0.5278
-        },
-        "name_day_hit_rates": {
-          "top5_long_hit_rate": 0.477,
-          "bottom5_short_hit_rate": 0.5024,
-          "top_decile_long_hit_rate": 0.4937,
-          "bottom_decile_short_hit_rate": 0.4995,
-          "universe_up_share": 0.4929
-        }
-      }
-    },
-    "priors": {
-      "ok": true,
-      "seconds": 18.1,
-      "info": {
-        "panel": {
-          "tickers": 902,
-          "start": "2016-01-04",
-          "end": "2026-10-09",
-          "stock_days": 2323218,
-          "tradable_stock_days": 2274321
-        },
-        "verdicts": {
-          "long a stock that gapped up 2-5% (continuation)": "no reliable edge (mean +1.0 bps, t = 0.78, n = 61,899)",
-          "long a stock that gapped up 5%+ (continuation)": "supported: +25.1 bps/session for that side, clears 4 bps costs (t = 5.6, n = 12,495)",
-          "short a stock that gapped down 2-5% (continuation)": "goes the other way: -21.4 bps/session for that side (t = -15.73, n = 58,530)",
-          "short a stock that gapped down 5%+ (continuation)": "supported: +44.0 bps/session for that side, clears 4 bps costs (t = 8.3, n = 11,758)",
-          "fade a +5% gap (short)": "goes the other way: -25.1 bps/session for that side (t = -5.6, n = 12,495)",
-          "fade a -5% gap (long)": "goes the other way: -44.0 bps/session for that side (t = -8.3, n = 11,758)",
-          "day-two fade after a +10% day (short)": "no reliable edge (mean -10.6 bps, t = -1.87, n = 7,530)",
-          "day-two bounce after a -10% day (long)": "supported: +80.0 bps/session for that side, clears 4 bps costs (t = 10.08, n = 5,953)",
-          "oversold bounce after a -15% three-day drop (long)": "supported: +36.1 bps/session for that side, clears 4 bps costs (t = 5.2, n = 8,161)",
-          "20-day momentum top decile (long)": "positive but inside costs (+2.2 bps vs 4 bps, t = 4.55, n = 228,275)",
-          "20-day momentum bottom decile (short)": "goes the other way: -3.2 bps/session for that side (t = -6.24, n = 228,503)"
-        }
-      }
     }
   },
   "ok": true,
-  "finished_at": "2026-10-11T20:16:49+00:00",
+  "finished_at": "2026-10-11T20:28:04+00:00",
   "data_end_date": "2026-10-09"
 }
