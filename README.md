@@ -29,7 +29,7 @@ not investment advice.
 | `output/universe.csv` | the ticker list used. |
 
 Raw URL pattern (public repo):
-`https://raw.githubusercontent.com/<owner>/alpha-ledger-quant/main/output/scores_latest.csv`
+`https://raw.githubusercontent.com/pingyifan/alpha-ledger-quant/main/output/scores_latest.csv`
 
 A consumer should check `status.json` → `ok` and that `scores_latest.csv` → `asof_date`
 is the last completed session before trusting the scores.
