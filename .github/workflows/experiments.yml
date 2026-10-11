@@ -60,14 +60,11 @@ jobs:
       - name: Build the Qlib store
         run: python -m pipeline.run_all --steps bin
       - name: Run experiments (${{ matrix.label }})
-        run: python -m research.label_experiments --labels "${{ matrix.label }}" --params "${{ github.event.inputs.params || 'base,reg' }}" 2>&1 | grep -v "it/s\]" | tee experiments_${{ matrix.label }}.log
-      - name: Upload results
+        run: python -m research.label_experiments --labels "${{ matrix.label }}" --params "${{ github.event.inputs.params || 'base,reg' }}" --out experiments_${{ matrix.label }}.json 2>&1 | grep -v "it/s\]" | tee experiments_${{ matrix.label }}.log
+      - name: Publish results as release assets (readable without artifact downloads)
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: experiments-${{ matrix.label }}-${{ github.run_id }}
-          path: |
-            experiments_${{ matrix.label }}.log
-            research/experiments_*.json
-          retention-days: 7
-          if-no-files-found: ignore
+        run: |
+          gh release view panel >/dev/null 2>&1 || gh release create panel --title "Price panel (rolling)" --notes "Research assets." --latest=false
+          for f in experiments_${{ matrix.label }}.json experiments_${{ matrix.label }}.log; do
+            [ -f "$f" ] && gh release upload panel "$f" --clobber || true
+          done

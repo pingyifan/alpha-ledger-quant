@@ -12,6 +12,7 @@ import json
 import logging
 import math
 from datetime import date
+from pathlib import Path
 
 import pandas as pd
 
@@ -67,6 +68,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--labels", default="oc,oo,cc_qlib,co")
     ap.add_argument("--params", default="base,reg")
+    ap.add_argument("--out", default="")
     args = ap.parse_args()
     logging.basicConfig(level=logging.WARNING)
     init_qlib()
@@ -81,7 +83,7 @@ def main() -> None:
             print(f"{lab:8s} {pname:10s} iter={row['best_iteration']:5d} IC={row['ic_mean']:+.4f} RankIC={row['rank_ic_mean']:+.4f} "
                   f"ICIR={row['icir']} | L/S {row['ls_bps']:+.1f} bps/d (t {row['ls_t']}) | top5 hit {row['top5_hit']:.1%} "
                   f"ret {row['top5_bps']:+.1f} | base up {row['base_up']:.1%} univ {row['universe_bps']:+.1f}", flush=True)
-    out = config.ROOT / "research" / f"experiments_{date.today().isoformat()}.json"
+    out = Path(args.out) if args.out else config.ROOT / "research" / f"experiments_{date.today().isoformat()}.json"
     out.write_text(json.dumps(results, indent=2, default=str))
     print("written", out)
 
