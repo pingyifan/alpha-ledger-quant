@@ -1,0 +1,71 @@
+name: nightly scores
+
+on:
+  schedule:
+    # 23:15 UTC Mon-Fri = 7:15 PM EDT / 6:15 PM EST, after Yahoo has the day's final bar
+    - cron: "15 23 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      steps:
+        description: "comma-separated steps (universe,download,bin,train,score,evaluate,priors)"
+        required: false
+        default: "universe,download,bin,train,score,evaluate,priors"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nightly
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      PYTHONUNBUFFERED: "1"
+      MLFLOW_ALLOW_FILE_STORE: "true"
+      MLFLOW_DISABLE_AGENT_HINT: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run pipeline
+        run: python -m pipeline.run_all --steps "${{ github.event.inputs.steps || 'universe,download,bin,train,score,evaluate,priors' }}"
+
+      - name: Commit outputs
+        if: always()
+        run: |
+          git config user.name "alpha-ledger-bot"
+          git config user.email "alpha-ledger-bot@users.noreply.github.com"
+          git add output
+          if git diff --cached --quiet; then
+            echo "nothing to commit"
+          else
+            ASOF=$(python -c "import json;print(json.load(open('output/status.json')).get('data_end_date','?'))")
+            OK=$(python -c "import json;print('ok' if json.load(open('output/status.json'))['ok'] else 'FAILED')")
+            git commit -m "nightly: scores as of ${ASOF} (${OK})"
+            git pull --rebase origin ${GITHUB_REF_NAME} || true
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
+
+      - name: Upload data snapshot (debugging, 3 days)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: run-logs-${{ github.run_id }}
+          path: |
+            output/status.json
+            data/download_meta.json
+          retention-days: 3

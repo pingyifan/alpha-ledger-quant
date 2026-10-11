@@ -1,0 +1,13 @@
+# raw and derived data never go in the repo
+data/
+mlruns/
+*.bin
+*.parquet
+*.pkl
+
+# python
+__pycache__/
+*.pyc
+.venv/
+qenv/
+.pytest_cache/
