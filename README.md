@@ -7,10 +7,10 @@ prediction journal. Every weekday evening a GitHub Actions job:
 2. downloads daily bars from Yahoo Finance and converts them into a
    [Microsoft Qlib](https://github.com/microsoft/qlib) binary store,
 3. trains two LightGBM cross-sectional models on Qlib's **Alpha158** features: `oc`, whose
-   label is the **next session's open-to-close return** (the ledger's scoring rule), and `oo`,
-   whose label is **next open to the following open** (a one-session hold that keeps the overnight),
+   label is the **next session's open-to-close return** (the ledger's scoring rule), and `cc`,
+   whose label is **next close to the following close** (a one-session hold that keeps the overnight),
 4. scores every name for the next session (`output/scores_latest.csv` for `oc`,
-   `output/scores_oo_latest.csv` for `oo`),
+   `output/scores_cc_latest.csv` for `cc`),
 5. evaluates the model out of sample on the last year and backtests the ledger's
    playbook priors on the whole panel,
 6. commits `output/` so the ledger's scheduled run can read it with one request.
@@ -23,11 +23,11 @@ not investment advice.
 | File | Contents |
 |---|---|
 | `output/scores_latest.csv` | `oc` model, one row per name: `asof_date, model, horizon, ticker, name, sector, index, score, rank, rank_pct, decile, close, adv20_usd, tradable`. `score` is the prediction for the *next* session's open-to-close return; `rank` 1 = best among tradable names; `decile` 10 = best. |
-| `output/scores_oo_latest.csv` | same layout for the `oo` model (next open to the following open). |
-| `output/model_card.json`, `output/model_card_oo.json` | per model: training dates, early-stopped rounds, validation IC / Rank IC (the ledger gates each sleeve on `validation.rank_ic_mean >= 0.01`), feature importance. |
-| `output/oos_report.md` / `.json`, `output/oos_report_oo.*` | per model, out of sample on the validation year: IC, name-day hit rates (top-5 longs, bottom-5 shorts, base rate), horizon-return simulations net of 4 bps, Qlib's TopkDropout reference backtest. |
+| `output/scores_cc_latest.csv` | same layout for the `cc` model (next close to the following close). |
+| `output/model_card.json`, `output/model_card_cc.json` | per model: training dates, early-stopped rounds, validation IC / Rank IC (the ledger gates each sleeve on `validation.rank_ic_mean >= 0.01`), feature importance. |
+| `output/oos_report.md` / `.json`, `output/oos_report_cc.*` | per model, out of sample on the validation year: IC, name-day hit rates (top-5 longs, bottom-5 shorts, base rate), horizon-return simulations net of 4 bps, Qlib's TopkDropout reference backtest. |
 | `output/priors_report.md` / `.json` | the playbook's priors (gap continuation vs fade, day-two moves, drawdown bounces, momentum, base rates, SPY conditionals) measured on every stock-day in the panel, with verdicts. |
-| `output/scores_history_top.csv`, `output/scores_history_top_oo.csv` | top/bottom 25 per day for the last 300 sessions, per model. |
+| `output/scores_history_top.csv`, `output/scores_history_top_cc.csv` | top/bottom 25 per day for the last 300 sessions, per model. |
 | `output/status.json` | what the last run did, how long each step took, errors if any, `data_end_date`. |
 | `output/universe.csv` | the ticker list used. |
 
@@ -41,12 +41,20 @@ is the last completed session before trusting the scores.
 
 * **Features**: Qlib `Alpha158` (9 candlestick-shape features, 4 normalised prices,
   29 rolling operators × windows 5/10/20/30/60) computed by Qlib's expression engine.
-* **Labels**: `oc` = `Ref($close, -1)/Ref($open, -1) - 1`; `oo` = `Ref($open, -2)/Ref($open, -1) - 1`.
+* **Labels**: `oc` = `Ref($close, -1)/Ref($open, -1) - 1`; `cc` = `Ref($close, -2)/Ref($close, -1) - 1`.
   Both are cross-sectionally z-scored per day for training (Qlib's default `CSZScoreNorm`),
   so each model learns *relative* strength over its horizon, not the level of the market.
 * **Regularisation**: learning rate 0.02, 31 leaves, depth 6, 500 rows per leaf, L1 50 / L2 300,
   early stopping on the validation year. Daily cross-sectional targets are mostly noise; the
   first, lighter configuration stopped after 8 trees with IC ≈ 0.
+* **Why two horizons** (label experiments, validation year to 2026-10-08, 252 sessions):
+  open-to-close has no out-of-sample signal under any setting (IC 0.002–0.005, Rank IC ≈ 0,
+  early stopping after 2–21 trees), while horizons that keep the overnight do: close-to-close
+  IC 0.026 / Rank IC 0.021 (regularised), open-to-next-open IC 0.020 / Rank IC 0.013,
+  overnight-only IC 0.017. The top-5 long basket of the close-to-close model averaged about
+  +45 bps per session net of costs against +6 bps for the universe; the long-short decile spread
+  stayed inside the noise (t < 1). `cc` is therefore the hold-sleeve model; `oc` is kept because
+  it is the ledger's own scoring rule and the agreement record is the experiment.
 * **Split**: train from `START_DATE` (2016) to one year before the end, validate on the
   last 252 complete sessions (early stopping and all out-of-sample numbers), then refit
   on everything with the stopped round count for tonight's scores. Retrained every run.

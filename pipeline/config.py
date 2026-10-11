@@ -46,13 +46,14 @@ MODELS = {
         "scores_file": "scores_latest.csv", "card_file": "model_card.json",
         "oos_file": "oos_report", "history_file": "scores_history_top.csv",
     },
-    "oo": {
-        "label": "Ref($open, -2)/Ref($open, -1) - 1",
-        "desc": "next session open to the following session's open (one-session hold, includes the overnight)",
-        "entry": "next open", "exit": "following session open",
-        "scores_file": "scores_oo_latest.csv", "card_file": "model_card_oo.json",
-        "oos_file": "oos_report_oo", "history_file": "scores_history_top_oo.csv",
+    "cc": {
+        "label": "Ref($close, -2)/Ref($close, -1) - 1",
+        "desc": "next session close to the following session's close (Qlib's native one-session hold, includes the overnight)",
+        "entry": "next session close", "exit": "following session close",
+        "scores_file": "scores_cc_latest.csv", "card_file": "model_card_cc.json",
+        "oos_file": "oos_report_cc", "history_file": "scores_history_top_cc.csv",
     },
+
 }
 DEFAULT_MODEL = "oc"
 LABEL_EXPR = MODELS[DEFAULT_MODEL]["label"]   # kept for backward compatibility
