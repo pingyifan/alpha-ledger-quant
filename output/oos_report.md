@@ -1,16 +1,16 @@
-# Out-of-sample report (validation year, model never trained on these sessions)
+# Out-of-sample report: model `oc` (next session open-to-close (the ledger's day-trade rule))
 
-Window 2025-10-08 to 2026-10-08, 252 sessions. Target = next session open-to-close return. Costs = 4 bps round trip, the same as the ledger's simulated fund.
+Validation year; the model never trained on these sessions. Window 2025-10-08 to 2026-10-08, 252 sessions. Target = next session open-to-close (the ledger's day-trade rule) return. Costs = 4 bps round trip, the same as the ledger's simulated fund.
 
 ## Signal quality
 
 | Metric | Value |
 |---|---|
-| IC (mean daily Pearson) | 0.0036 |
-| ICIR | 0.026 |
-| Rank IC | -0.0013 |
-| Rank ICIR | -0.011 |
-| Days with IC > 0 | 52.8% |
+| IC (mean daily Pearson) | 0.0031 |
+| ICIR | 0.021 |
+| Rank IC | 0.0001 |
+| Rank ICIR | 0.001 |
+| Days with IC > 0 | 49.6% |
 
 For scale: Qlib's LightGBM/Alpha158 benchmark on CSI300 reports IC 0.045 and Rank IC 0.047 (next-day close-to-close).
 
@@ -18,47 +18,47 @@ For scale: Qlib's LightGBM/Alpha158 benchmark on CSI300 reports IC 0.045 and Ran
 
 | Basket | Hit rate |
 |---|---|
-| Top-5 longs, share that closed above the open | 47.7% |
-| Bottom-5 shorts, share that closed below the open | 50.2% |
-| Top decile longs | 49.4% |
-| Bottom decile shorts | 50.0% |
-| Base rate: all tradable names that closed above the open | 49.3% |
+| Top-5 longs, share with a positive horizon return | 47.5% |
+| Bottom-5 shorts, share with a negative horizon return | 47.7% |
+| Top decile longs | 48.9% |
+| Bottom decile shorts | 49.8% |
+| Base rate: all tradable names with a positive horizon return | 49.3% |
 
-## Open-to-close simulations, net of costs (per $1 of gross exposure)
+## Horizon-return simulations, net of costs (per $1 of gross exposure)
 
 | Simulation | Days | Mean/day (bps) | Annualized | Sharpe | Hit days | Max DD | t |
 |---|---|---|---|---|---|---|---|
-| decile_long_short | 252 | -4.9 | -11.7% | -1.619 | 45.2% | -14.3% | -1.62 |
-| decile_long_only | 252 | -2.8 | -6.7% | -0.349 | 45.6% | -17.7% | -0.35 |
-| top5_long_only | 252 | +1.9 | +4.9% | 0.115 | 51.6% | -38.8% | 0.12 |
-| top5_long_bottom5_short | 252 | -7.2 | -16.7% | -0.834 | 47.6% | -26.2% | -0.83 |
+| decile_long_short | 252 | -5.5 | -13.0% | -1.58 | 41.7% | -15.3% | -1.58 |
+| decile_long_only | 252 | -4.3 | -10.2% | -0.521 | 44.4% | -20.5% | -0.52 |
+| top5_long_only | 252 | +1.3 | +3.4% | 0.083 | 48.4% | -30.9% | 0.08 |
+| top5_long_bottom5_short | 252 | -12.5 | -27.0% | -1.305 | 48.8% | -37.0% | -1.3 |
 | universe_equal_weight_long | 252 | -4.8 | -11.3% | -1.066 | 43.6% | -15.0% | -1.07 |
-| spy_open_to_close | 252 | -3.9 | -9.4% | -0.96 | 48.0% | -11.5% | -0.96 |
+| spy_same_horizon | 252 | -3.9 | -9.4% | -0.96 | 48.0% | -11.5% | -0.96 |
 
 ## Reference: Qlib TopkDropout portfolio backtest (long only, close-to-close)
 
 TopkDropout topk=30 n_drop=3, deal at close, 5+5 bps, benchmark SPY
 
-- Annualized excess return vs SPY: +32.6%
-- Information ratio: 1.405
-- Max drawdown (excess): -19.8%
+- Annualized excess return vs SPY: +37.0%
+- Information ratio: 1.662
+- Max drawdown (excess): -14.7%
 
 ## Monthly decile long-short, net
 
 | Month | Return |
 |---|---|
-| 2025-10 | +0.22% |
-| 2025-11 | -0.51% |
-| 2025-12 | -3.95% |
-| 2026-01 | +0.31% |
-| 2026-02 | -0.61% |
-| 2026-03 | -0.55% |
-| 2026-04 | -1.76% |
-| 2026-05 | -0.02% |
-| 2026-06 | -1.17% |
-| 2026-07 | -3.86% |
-| 2026-08 | -0.65% |
-| 2026-09 | -0.14% |
-| 2026-10 | +0.20% |
+| 2025-10 | -0.01% |
+| 2025-11 | +0.14% |
+| 2025-12 | -3.83% |
+| 2026-01 | -0.20% |
+| 2026-02 | +1.09% |
+| 2026-03 | -0.18% |
+| 2026-04 | -1.54% |
+| 2026-05 | -1.36% |
+| 2026-06 | -2.04% |
+| 2026-07 | -4.45% |
+| 2026-08 | -1.09% |
+| 2026-09 | -0.66% |
+| 2026-10 | +0.08% |
 
 _Research output, not investment advice. Survivorship: the universe is current index membership._
