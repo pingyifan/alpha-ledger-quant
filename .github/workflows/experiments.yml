@@ -1,0 +1,73 @@
+name: label experiments
+
+on:
+  workflow_dispatch:
+    inputs:
+      labels:
+        description: "labels to test (keys in research/label_experiments.py), one job each"
+        required: false
+        default: "oc,oo,cc_qlib,co"
+      params:
+        description: "param sets to test in each job"
+        required: false
+        default: "base,reg"
+
+permissions:
+  contents: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - id: m
+        run: |
+          python3 - <<'EOF' >> "$GITHUB_OUTPUT"
+          import json, os
+          labels = [x.strip() for x in "${{ github.event.inputs.labels || 'oc,oo,cc_qlib,co' }}".split(",") if x.strip()]
+          print("matrix=" + json.dumps({"label": labels}))
+          EOF
+
+  run:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    env:
+      PYTHONUNBUFFERED: "1"
+      MLFLOW_ALLOW_FILE_STORE: "true"
+      MLFLOW_DISABLE_AGENT_HINT: "1"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Fetch the rolling price panel
+        run: |
+          mkdir -p data
+          gh release download panel -p panel.tar.gz -D /tmp
+          tar -xzf /tmp/panel.tar.gz -C data
+          ls data/csv | wc -l
+      - name: Build the Qlib store
+        run: python -m pipeline.run_all --steps bin
+      - name: Run experiments (${{ matrix.label }})
+        run: python -m research.label_experiments --labels "${{ matrix.label }}" --params "${{ github.event.inputs.params || 'base,reg' }}" 2>&1 | grep -v "it/s\]" | tee experiments_${{ matrix.label }}.log
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: experiments-${{ matrix.label }}-${{ github.run_id }}
+          path: |
+            experiments_${{ matrix.label }}.log
+            research/experiments_*.json
+          retention-days: 7
+          if-no-files-found: ignore
