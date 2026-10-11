@@ -60,12 +60,20 @@ jobs:
             git push origin HEAD:${GITHUB_REF_NAME}
           fi
 
-      - name: Upload data snapshot (debugging, 3 days)
+      - name: Pack the price panel (for offline research, 2 days)
+        if: always()
+        run: |
+          if [ -d data/csv ]; then tar -czf panel.tar.gz -C data csv aux download_meta.json 2>/dev/null || tar -czf panel.tar.gz -C data csv; fi
+          ls -la panel.tar.gz 2>/dev/null || echo "no panel"
+
+      - name: Upload run logs and panel
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: run-logs-${{ github.run_id }}
+          name: run-${{ github.run_id }}
           path: |
             output/status.json
             data/download_meta.json
-          retention-days: 3
+            panel.tar.gz
+          retention-days: 2
+          if-no-files-found: ignore
