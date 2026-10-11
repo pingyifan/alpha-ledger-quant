@@ -15,7 +15,7 @@ CSV_DIR = DATA_DIR / "csv"            # one CSV per symbol, Qlib dump_bin input 
 AUX_DIR = DATA_DIR / "aux"            # series kept out of the Qlib store (VIX)
 QLIB_DIR = DATA_DIR / "qlib_us"       # Qlib binary provider directory
 MODEL_PATH = DATA_DIR / "model_lgbm.txt"
-OUTPUT_DIR = ROOT / "output"
+OUTPUT_DIR = Path(os.environ.get("ALQ_OUTPUT_DIR", ROOT / "output"))
 
 # --- universe -----------------------------------------------------------------
 # S&P 500 + S&P 400 constituents (Wikipedia, current membership) plus a few ETFs.
