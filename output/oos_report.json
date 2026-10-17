@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T01:30:57+00:00",
+  "generated_at": "2026-10-17T01:24:33+00:00",
   "window": {
     "start": "2025-10-14",
     "end": "2026-10-14",
@@ -7,69 +7,69 @@
   },
   "cost_round_trip": 0.0004,
   "signal": {
-    "ic_mean": 0.00463,
-    "icir": 0.0311,
-    "rank_ic_mean": 0.00062,
-    "rank_icir": 0.0048,
-    "ic_positive_days": 0.5
+    "ic_mean": 0.00511,
+    "icir": 0.0348,
+    "rank_ic_mean": 0.00033,
+    "rank_icir": 0.0026,
+    "ic_positive_days": 0.5119
   },
   "name_day_hit_rates": {
-    "top5_long_hit_rate": 0.4786,
-    "bottom5_short_hit_rate": 0.4786,
-    "top_decile_long_hit_rate": 0.4916,
-    "bottom_decile_short_hit_rate": 0.4983,
-    "universe_up_share": 0.4941
+    "top5_long_hit_rate": 0.4794,
+    "bottom5_short_hit_rate": 0.4857,
+    "top_decile_long_hit_rate": 0.4928,
+    "bottom_decile_short_hit_rate": 0.4974,
+    "universe_up_share": 0.4942
   },
   "simulations_net_of_costs": {
     "decile_long_short": {
       "days": 252,
-      "mean_daily_bps": -5.66,
-      "annualized_return": -0.133,
-      "sharpe": -1.631,
-      "hit_rate_days": 0.4365,
-      "max_drawdown": -0.1479,
-      "t_stat": -1.63,
-      "total_return": -0.1363
+      "mean_daily_bps": -4.97,
+      "annualized_return": -0.1177,
+      "sharpe": -1.444,
+      "hit_rate_days": 0.4325,
+      "max_drawdown": -0.134,
+      "t_stat": -1.44,
+      "total_return": -0.121
     },
     "decile_long_only": {
       "days": 252,
-      "mean_daily_bps": -3.01,
-      "annualized_return": -0.0731,
-      "sharpe": -0.372,
+      "mean_daily_bps": -1.67,
+      "annualized_return": -0.0412,
+      "sharpe": -0.208,
       "hit_rate_days": 0.4563,
-      "max_drawdown": -0.2137,
-      "t_stat": -0.37,
-      "total_return": -0.0921
+      "max_drawdown": -0.202,
+      "t_stat": -0.21,
+      "total_return": -0.0606
     },
     "top5_long_only": {
       "days": 252,
-      "mean_daily_bps": 2.89,
-      "annualized_return": 0.0755,
-      "sharpe": 0.18,
-      "hit_rate_days": 0.496,
-      "max_drawdown": -0.3164,
-      "t_stat": 0.18,
-      "total_return": -0.0092
+      "mean_daily_bps": 0.82,
+      "annualized_return": 0.0209,
+      "sharpe": 0.051,
+      "hit_rate_days": 0.4881,
+      "max_drawdown": -0.3241,
+      "t_stat": 0.05,
+      "total_return": -0.0601
     },
     "top5_long_bottom5_short": {
       "days": 252,
-      "mean_daily_bps": -12.44,
-      "annualized_return": -0.2692,
-      "sharpe": -1.32,
-      "hit_rate_days": 0.504,
-      "max_drawdown": -0.3817,
-      "t_stat": -1.32,
-      "total_return": -0.2896
+      "mean_daily_bps": -10.01,
+      "annualized_return": -0.2231,
+      "sharpe": -1.062,
+      "hit_rate_days": 0.4841,
+      "max_drawdown": -0.3308,
+      "t_stat": -1.06,
+      "total_return": -0.2447
     },
     "universe_equal_weight_long": {
       "days": 252,
-      "mean_daily_bps": -3.95,
-      "annualized_return": -0.0948,
-      "sharpe": -0.934,
+      "mean_daily_bps": -3.86,
+      "annualized_return": -0.0927,
+      "sharpe": -0.911,
       "hit_rate_days": 0.4325,
       "max_drawdown": -0.1505,
-      "t_stat": -0.93,
-      "total_return": -0.0999
+      "t_stat": -0.91,
+      "total_return": -0.0979
     },
     "spy_same_horizon": {
       "days": 252,
@@ -83,25 +83,25 @@
     }
   },
   "monthly_decile_long_short_net": {
-    "2025-10": -0.0002,
-    "2025-11": -0.0095,
-    "2025-12": -0.0325,
-    "2026-01": -0.0004,
-    "2026-02": 0.0068,
-    "2026-03": 0.0055,
-    "2026-04": -0.0157,
-    "2026-05": -0.0044,
-    "2026-06": -0.02,
-    "2026-07": -0.0466,
-    "2026-08": -0.0175,
-    "2026-09": -0.0086,
-    "2026-10": -0.0011
+    "2025-10": -0.0016,
+    "2025-11": -0.0031,
+    "2025-12": -0.0322,
+    "2026-01": -0.0013,
+    "2026-02": 0.0047,
+    "2026-03": 0.0045,
+    "2026-04": -0.0074,
+    "2026-05": -0.0038,
+    "2026-06": -0.0188,
+    "2026-07": -0.0428,
+    "2026-08": -0.0164,
+    "2026-09": -0.0068,
+    "2026-10": -0.0021
   },
   "qlib_topk_backtest_close_to_close": {
     "strategy": "TopkDropout topk=30 n_drop=3, deal at close, 5+5 bps, benchmark SPY",
-    "excess_return_annualized": 0.2936,
-    "information_ratio": 1.315,
-    "max_drawdown": -0.1218,
+    "excess_return_annualized": 0.3222,
+    "information_ratio": 1.353,
+    "max_drawdown": -0.1564,
     "sessions": 252
   },
   "model_key": "oc",

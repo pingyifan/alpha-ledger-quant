@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T01:34:18+00:00",
+  "generated_at": "2026-10-17T01:26:22+00:00",
   "window": {
     "start": "2025-10-13",
     "end": "2026-10-13",
@@ -7,69 +7,69 @@
   },
   "cost_round_trip": 0.0004,
   "signal": {
-    "ic_mean": 0.02084,
-    "icir": 0.1044,
-    "rank_ic_mean": 0.01821,
-    "rank_icir": 0.1057,
+    "ic_mean": 0.02158,
+    "icir": 0.1074,
+    "rank_ic_mean": 0.01777,
+    "rank_icir": 0.1032,
     "ic_positive_days": 0.5873
   },
   "name_day_hit_rates": {
-    "top5_long_hit_rate": 0.5294,
-    "bottom5_short_hit_rate": 0.4603,
-    "top_decile_long_hit_rate": 0.5101,
-    "bottom_decile_short_hit_rate": 0.4931,
-    "universe_up_share": 0.5072
+    "top5_long_hit_rate": 0.5302,
+    "bottom5_short_hit_rate": 0.4802,
+    "top_decile_long_hit_rate": 0.5082,
+    "bottom_decile_short_hit_rate": 0.4942,
+    "universe_up_share": 0.5071
   },
   "simulations_net_of_costs": {
     "decile_long_short": {
       "days": 252,
-      "mean_daily_bps": 2.21,
-      "annualized_return": 0.0572,
-      "sharpe": 0.406,
-      "hit_rate_days": 0.5357,
-      "max_drawdown": -0.1077,
-      "t_stat": 0.41,
-      "total_return": 0.0474
+      "mean_daily_bps": 1.22,
+      "annualized_return": 0.0312,
+      "sharpe": 0.221,
+      "hit_rate_days": 0.5516,
+      "max_drawdown": -0.11,
+      "t_stat": 0.22,
+      "total_return": 0.0214
     },
     "decile_long_only": {
       "days": 252,
-      "mean_daily_bps": 12.31,
-      "annualized_return": 0.3634,
-      "sharpe": 1.081,
+      "mean_daily_bps": 10.58,
+      "annualized_return": 0.3054,
+      "sharpe": 0.926,
       "hit_rate_days": 0.5476,
-      "max_drawdown": -0.1537,
-      "t_stat": 1.08,
-      "total_return": 0.3088
+      "max_drawdown": -0.1651,
+      "t_stat": 0.93,
+      "total_return": 0.2527
     },
     "top5_long_only": {
       "days": 252,
-      "mean_daily_bps": 37.96,
-      "annualized_return": 1.5982,
-      "sharpe": 1.659,
-      "hit_rate_days": 0.5635,
-      "max_drawdown": -0.1868,
-      "t_stat": 1.66,
-      "total_return": 1.2044
+      "mean_daily_bps": 41.32,
+      "annualized_return": 1.8265,
+      "sharpe": 1.884,
+      "hit_rate_days": 0.5397,
+      "max_drawdown": -0.1988,
+      "t_stat": 1.88,
+      "total_return": 1.4312
     },
     "top5_long_bottom5_short": {
       "days": 252,
-      "mean_daily_bps": 5.92,
-      "annualized_return": 0.1607,
-      "sharpe": 0.523,
-      "hit_rate_days": 0.496,
-      "max_drawdown": -0.138,
-      "t_stat": 0.52,
-      "total_return": 0.1149
+      "mean_daily_bps": 15.34,
+      "annualized_return": 0.4715,
+      "sharpe": 1.37,
+      "hit_rate_days": 0.5079,
+      "max_drawdown": -0.1117,
+      "t_stat": 1.37,
+      "total_return": 0.4149
     },
     "universe_equal_weight_long": {
       "days": 252,
-      "mean_daily_bps": 2.89,
-      "annualized_return": 0.0754,
-      "sharpe": 0.574,
+      "mean_daily_bps": 2.92,
+      "annualized_return": 0.0763,
+      "sharpe": 0.58,
       "hit_rate_days": 0.5198,
       "max_drawdown": -0.0909,
-      "t_stat": 0.57,
-      "total_return": 0.0669
+      "t_stat": 0.58,
+      "total_return": 0.0677
     },
     "spy_same_horizon": {
       "days": 252,
@@ -83,25 +83,25 @@
     }
   },
   "monthly_decile_long_short_net": {
-    "2025-10": 0.0192,
-    "2025-11": -0.0121,
-    "2025-12": 0.0167,
-    "2026-01": -0.0064,
-    "2026-02": -0.0097,
-    "2026-03": 0.0059,
-    "2026-04": 0.0409,
-    "2026-05": 0.0404,
-    "2026-06": -0.0414,
-    "2026-07": 0.0193,
-    "2026-08": -0.0178,
-    "2026-09": 0.0237,
-    "2026-10": -0.0284
+    "2025-10": 0.0184,
+    "2025-11": -0.0149,
+    "2025-12": 0.0223,
+    "2026-01": -0.0088,
+    "2026-02": -0.02,
+    "2026-03": 0.0039,
+    "2026-04": 0.0348,
+    "2026-05": 0.0354,
+    "2026-06": -0.0454,
+    "2026-07": 0.0226,
+    "2026-08": -0.0156,
+    "2026-09": 0.0238,
+    "2026-10": -0.0312
   },
   "qlib_topk_backtest_close_to_close": {
     "strategy": "TopkDropout topk=30 n_drop=3, deal at close, 5+5 bps, benchmark SPY",
-    "excess_return_annualized": 0.4376,
-    "information_ratio": 1.462,
-    "max_drawdown": -0.2184,
+    "excess_return_annualized": 0.4315,
+    "information_ratio": 1.482,
+    "max_drawdown": -0.2066,
     "sessions": 252
   },
   "model_key": "cc",
