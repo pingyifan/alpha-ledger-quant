@@ -1,5 +1,5 @@
 {
-  "started_at": "2026-10-22T01:34:20+00:00",
+  "started_at": "2026-10-23T01:34:18+00:00",
   "steps": {
     "universe": {
       "ok": true,
@@ -10,9 +10,9 @@
     },
     "download": {
       "ok": true,
-      "seconds": 118.1,
+      "seconds": 91.1,
       "info": {
-        "downloaded_at": "2026-10-22T01:36:18+00:00",
+        "downloaded_at": "2026-10-23T01:35:49+00:00",
         "start": "2016-01-01",
         "requested": 907,
         "written": 905,
@@ -20,76 +20,151 @@
           "VYLR"
         ],
         "last_dates": {
-          "2026-10-21": 905
+          "2026-10-22": 905
         },
         "missing_n": 0
       }
     },
     "bin": {
       "ok": true,
-      "seconds": 14.6,
+      "seconds": 12.8,
       "info": {
         "csv_files": 905,
         "instruments_all": 905,
         "instruments_stocks": 902,
         "calendar_start": "2016-01-04",
-        "calendar_end": "2026-10-21",
-        "calendar_days": 2716
+        "calendar_end": "2026-10-22",
+        "calendar_days": 2717
       }
     },
     "train:oc": {
       "ok": true,
-      "seconds": 102.8,
+      "seconds": 77.1,
+      "info": {
+        "dates": {
+          "start": "2016-01-01",
+          "train_end": "2025-10-20",
+          "valid_start": "2025-10-21",
+          "valid_end": "2026-10-21",
+          "end": "2026-10-22"
+        },
+        "best_iteration": 16,
+        "validation": {
+          "days": 252,
+          "ic_mean": 0.00305,
+          "ic_std": 0.15094,
+          "icir": 0.0202,
+          "rank_ic_mean": -1e-05,
+          "rank_icir": -0.0001,
+          "ic_positive_days": 0.496,
+          "best_iteration": 16,
+          "train_l2": 0.9949413338302247,
+          "valid_l2": 0.999346899608734
+        }
+      }
+    },
+    "score:oc": {
+      "ok": true,
+      "seconds": 2.3,
+      "info": {
+        "model": "oc",
+        "asof_date": "2026-10-22",
+        "n_scored": 902,
+        "n_tradable": 899,
+        "top5": [
+          "FN",
+          "CRS",
+          "MRNA",
+          "DY",
+          "COHR"
+        ],
+        "bottom5": [
+          "HPE",
+          "CVLT",
+          "RH",
+          "AKAM",
+          "CSX"
+        ]
+      }
+    },
+    "evaluate:oc": {
+      "ok": true,
+      "seconds": 10.7,
+      "info": {
+        "window": {
+          "start": "2025-10-21",
+          "end": "2026-10-21",
+          "sessions": 252
+        },
+        "signal": {
+          "ic_mean": 0.00305,
+          "icir": 0.0202,
+          "rank_ic_mean": -1e-05,
+          "rank_icir": -0.0001,
+          "ic_positive_days": 0.496
+        },
+        "name_day_hit_rates": {
+          "top5_long_hit_rate": 0.4786,
+          "bottom5_short_hit_rate": 0.4762,
+          "top_decile_long_hit_rate": 0.4936,
+          "bottom_decile_short_hit_rate": 0.4999,
+          "universe_up_share": 0.4944
+        }
+      }
+    },
+    "train:cc": {
+      "ok": true,
+      "seconds": 115.4,
       "info": {
         "dates": {
           "start": "2016-01-01",
           "train_end": "2025-10-17",
           "valid_start": "2025-10-20",
           "valid_end": "2026-10-20",
-          "end": "2026-10-21"
+          "end": "2026-10-22"
         },
-        "best_iteration": 15,
+        "best_iteration": 202,
         "validation": {
           "days": 252,
-          "ic_mean": 0.00231,
-          "ic_std": 0.15167,
-          "icir": 0.0152,
-          "rank_ic_mean": 0.00075,
-          "rank_icir": 0.0056,
-          "ic_positive_days": 0.4802,
-          "best_iteration": 15,
-          "train_l2": 0.9949784635327346,
-          "valid_l2": 0.9994130995441964
+          "ic_mean": 0.01848,
+          "ic_std": 0.20378,
+          "icir": 0.0907,
+          "rank_ic_mean": 0.01397,
+          "rank_icir": 0.0798,
+          "ic_positive_days": 0.5873,
+          "best_iteration": 202,
+          "train_l2": 0.9929811641512016,
+          "valid_l2": 0.9986421360026568
         }
       }
     },
-    "score:oc": {
+    "score:cc": {
       "ok": true,
-      "seconds": 3.1,
+      "seconds": 2.4,
       "info": {
-        "model": "oc",
-        "asof_date": "2026-10-21",
+        "model": "cc",
+        "asof_date": "2026-10-22",
         "n_scored": 902,
         "n_tradable": 899,
         "top5": [
-          "FLEX",
-          "IESC",
-          "FN",
-          "DY",
-          "WING"
+          "MRNA",
+          "MTZ",
+          "APP",
+          "CAR",
+          "MPC"
         ],
         "bottom5": [
-          "TTMI",
-          "MTSI",
-          "SMTC",
-          "AMD",
-          "SANM"
+          "VICR",
+          "CRS",
+          "RH",
+          "XRAY",
+          "HUBS"
         ]
       }
     },
-    "evaluate:oc": {
+    "evaluate:cc": {
       "ok": true,
-      "seconds": 15.3,
+      "seconds": 10.9,
       "info": {
         "window": {
           "start": "2025-10-20",
@@ -97,156 +172,81 @@
           "sessions": 252
         },
         "signal": {
-          "ic_mean": 0.00231,
-          "icir": 0.0152,
-          "rank_ic_mean": 0.00075,
-          "rank_icir": 0.0056,
-          "ic_positive_days": 0.4802
+          "ic_mean": 0.01848,
+          "icir": 0.0907,
+          "rank_ic_mean": 0.01397,
+          "rank_icir": 0.0798,
+          "ic_positive_days": 0.5873
         },
         "name_day_hit_rates": {
-          "top5_long_hit_rate": 0.4881,
-          "bottom5_short_hit_rate": 0.4841,
-          "top_decile_long_hit_rate": 0.4916,
-          "bottom_decile_short_hit_rate": 0.4967,
-          "universe_up_share": 0.4941
-        }
-      }
-    },
-    "train:cc": {
-      "ok": true,
-      "seconds": 127.7,
-      "info": {
-        "dates": {
-          "start": "2016-01-01",
-          "train_end": "2025-10-16",
-          "valid_start": "2025-10-17",
-          "valid_end": "2026-10-19",
-          "end": "2026-10-21"
-        },
-        "best_iteration": 107,
-        "validation": {
-          "days": 252,
-          "ic_mean": 0.02012,
-          "ic_std": 0.20759,
-          "icir": 0.0969,
-          "rank_ic_mean": 0.01719,
-          "rank_icir": 0.0968,
-          "ic_positive_days": 0.5913,
-          "best_iteration": 107,
-          "train_l2": 0.9940487582266904,
-          "valid_l2": 0.9986051368416928
-        }
-      }
-    },
-    "score:cc": {
-      "ok": true,
-      "seconds": 3.2,
-      "info": {
-        "model": "cc",
-        "asof_date": "2026-10-21",
-        "n_scored": 902,
-        "n_tradable": 899,
-        "top5": [
-          "MRNA",
-          "VICR",
-          "MTZ",
-          "CAR",
-          "ILMN"
-        ],
-        "bottom5": [
-          "RH",
-          "SKYD",
-          "PCG",
-          "DOCU",
-          "BROS"
-        ]
-      }
-    },
-    "evaluate:cc": {
-      "ok": true,
-      "seconds": 15.2,
-      "info": {
-        "window": {
-          "start": "2025-10-17",
-          "end": "2026-10-19",
-          "sessions": 252
-        },
-        "signal": {
-          "ic_mean": 0.02012,
-          "icir": 0.0969,
-          "rank_ic_mean": 0.01719,
-          "rank_icir": 0.0968,
-          "ic_positive_days": 0.5913
-        },
-        "name_day_hit_rates": {
-          "top5_long_hit_rate": 0.523,
-          "bottom5_short_hit_rate": 0.481,
-          "top_decile_long_hit_rate": 0.511,
-          "bottom_decile_short_hit_rate": 0.496,
-          "universe_up_share": 0.5067
+          "top5_long_hit_rate": 0.5159,
+          "bottom5_short_hit_rate": 0.4706,
+          "top_decile_long_hit_rate": 0.509,
+          "bottom_decile_short_hit_rate": 0.4905,
+          "universe_up_share": 0.5068
         }
       }
     },
     "priors": {
       "ok": true,
-      "seconds": 13.6,
+      "seconds": 9.8,
       "info": {
         "panel": {
           "tickers": 902,
           "start": "2016-01-04",
-          "end": "2026-10-21",
-          "stock_days": 2330434,
-          "tradable_stock_days": 2281537
+          "end": "2026-10-22",
+          "stock_days": 2331336,
+          "tradable_stock_days": 2282438
         },
         "verdicts": {
-          "long a stock that gapped up 2-5% (continuation)": "no reliable edge (mean +0.8 bps, t = 0.61, n = 62,158)",
-          "long a stock that gapped up 5%+ (continuation)": "supported: +24.5 bps/session for that side, clears 4 bps costs (t = 5.48, n = 12,520)",
-          "short a stock that gapped down 2-5% (continuation)": "goes the other way: -21.3 bps/session for that side (t = -15.72, n = 58,816)",
-          "short a stock that gapped down 5%+ (continuation)": "supported: +43.1 bps/session for that side, clears 4 bps costs (t = 8.14, n = 11,794)",
-          "fade a +5% gap (short)": "goes the other way: -24.5 bps/session for that side (t = -5.48, n = 12,520)",
-          "fade a -5% gap (long)": "goes the other way: -43.1 bps/session for that side (t = -8.14, n = 11,794)",
-          "day-two fade after a +10% day (short)": "no reliable edge (mean -10.7 bps, t = -1.89, n = 7,538)",
-          "day-two bounce after a -10% day (long)": "supported: +80.0 bps/session for that side, clears 4 bps costs (t = 10.09, n = 5,965)",
+          "long a stock that gapped up 2-5% (continuation)": "no reliable edge (mean +0.8 bps, t = 0.66, n = 62,172)",
+          "long a stock that gapped up 5%+ (continuation)": "supported: +24.6 bps/session for that side, clears 4 bps costs (t = 5.49, n = 12,521)",
+          "short a stock that gapped down 2-5% (continuation)": "goes the other way: -20.9 bps/session for that side (t = -15.45, n = 58,918)",
+          "short a stock that gapped down 5%+ (continuation)": "supported: +43.8 bps/session for that side, clears 4 bps costs (t = 8.28, n = 11,828)",
+          "fade a +5% gap (short)": "goes the other way: -24.6 bps/session for that side (t = -5.49, n = 12,521)",
+          "fade a -5% gap (long)": "goes the other way: -43.8 bps/session for that side (t = -8.28, n = 11,828)",
+          "day-two fade after a +10% day (short)": "no reliable edge (mean -10.6 bps, t = -1.89, n = 7,538)",
+          "day-two bounce after a -10% day (long)": "supported: +80.1 bps/session for that side, clears 4 bps costs (t = 10.11, n = 5,967)",
           "oversold bounce after a -15% three-day drop (long)": "supported: +35.1 bps/session for that side, clears 4 bps costs (t = 5.07, n = 8,202)",
-          "20-day momentum top decile (long)": "positive but inside costs (+2.1 bps vs 4 bps, t = 4.35, n = 229,003)",
-          "20-day momentum bottom decile (short)": "goes the other way: -3.1 bps/session for that side (t = -6.12, n = 229,231)"
+          "20-day momentum top decile (long)": "positive but inside costs (+2.1 bps vs 4 bps, t = 4.43, n = 229,093)",
+          "20-day momentum bottom decile (short)": "goes the other way: -3.1 bps/session for that side (t = -6.03, n = 229,322)"
         }
       }
     }
   },
   "ok": true,
-  "finished_at": "2026-10-22T01:41:15+00:00",
-  "data_end_date": "2026-10-21",
+  "finished_at": "2026-10-23T01:39:52+00:00",
+  "data_end_date": "2026-10-22",
   "models": {
     "oc": {
       "validation": {
         "days": 252,
-        "ic_mean": 0.00231,
-        "ic_std": 0.15167,
-        "icir": 0.0152,
-        "rank_ic_mean": 0.00075,
-        "rank_icir": 0.0056,
-        "ic_positive_days": 0.4802,
-        "best_iteration": 15,
-        "train_l2": 0.9949784635327346,
-        "valid_l2": 0.9994130995441964
+        "ic_mean": 0.00305,
+        "ic_std": 0.15094,
+        "icir": 0.0202,
+        "rank_ic_mean": -1e-05,
+        "rank_icir": -0.0001,
+        "ic_positive_days": 0.496,
+        "best_iteration": 16,
+        "train_l2": 0.9949413338302247,
+        "valid_l2": 0.999346899608734
       },
-      "best_iteration": 15
+      "best_iteration": 16
     },
     "cc": {
       "validation": {
         "days": 252,
-        "ic_mean": 0.02012,
-        "ic_std": 0.20759,
-        "icir": 0.0969,
-        "rank_ic_mean": 0.01719,
-        "rank_icir": 0.0968,
-        "ic_positive_days": 0.5913,
-        "best_iteration": 107,
-        "train_l2": 0.9940487582266904,
-        "valid_l2": 0.9986051368416928
+        "ic_mean": 0.01848,
+        "ic_std": 0.20378,
+        "icir": 0.0907,
+        "rank_ic_mean": 0.01397,
+        "rank_icir": 0.0798,
+        "ic_positive_days": 0.5873,
+        "best_iteration": 202,
+        "train_l2": 0.9929811641512016,
+        "valid_l2": 0.9986421360026568
       },
-      "best_iteration": 107
+      "best_iteration": 202
     }
   }
 }
