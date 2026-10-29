@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-28T02:26:06+00:00",
+  "generated_at": "2026-10-29T02:44:16+00:00",
   "panel": {
     "tickers": 902,
     "start": "2016-01-04",
-    "end": "2026-10-27",
-    "stock_days": 2334041,
-    "tradable_stock_days": 2285143
+    "end": "2026-10-28",
+    "stock_days": 2334944,
+    "tradable_stock_days": 2286046
   },
   "cost_round_trip_bps": 4.0,
   "tests": {
@@ -13,67 +13,67 @@
       {
         "condition": "gap <= -5%",
         "period": "full",
-        "n": 11843,
-        "mean_oc_bps": -43.6,
-        "median_oc_bps": -38.6,
-        "share_up": 0.4636,
-        "t_stat": -8.25,
-        "continuation_rate": 0.5335
+        "n": 11853,
+        "mean_oc_bps": -43.7,
+        "median_oc_bps": -38.5,
+        "share_up": 0.4638,
+        "t_stat": -8.26,
+        "continuation_rate": 0.5334
       },
       {
         "condition": "-5% < gap <= -2%",
         "period": "full",
-        "n": 58982,
-        "mean_oc_bps": 20.9,
+        "n": 59011,
+        "mean_oc_bps": 21.0,
         "median_oc_bps": 18.8,
         "share_up": 0.5254,
-        "t_stat": 15.45,
+        "t_stat": 15.48,
         "continuation_rate": 0.4707
       },
       {
         "condition": "-2% < gap <= -1%",
         "period": "full",
-        "n": 146814,
+        "n": 146920,
         "mean_oc_bps": 9.9,
-        "median_oc_bps": 13.1,
-        "share_up": 0.5274,
-        "t_stat": 16.28,
-        "continuation_rate": 0.468
+        "median_oc_bps": 13.2,
+        "share_up": 0.5275,
+        "t_stat": 16.37,
+        "continuation_rate": 0.4679
       },
       {
         "condition": "-1% < gap <= -0.3%",
         "period": "full",
-        "n": 420936,
+        "n": 421153,
         "mean_oc_bps": 2.9,
         "median_oc_bps": 7.9,
         "share_up": 0.5214,
-        "t_stat": 10.92,
+        "t_stat": 10.95,
         "continuation_rate": 0.4729
       },
       {
         "condition": "flat (|gap| < 0.3%)",
         "period": "full",
-        "n": 868281,
+        "n": 868566,
         "mean_oc_bps": 0.0,
         "median_oc_bps": 2.2,
         "share_up": 0.5052,
-        "t_stat": 0.28,
-        "continuation_rate": 0.4852
+        "t_stat": 0.22,
+        "continuation_rate": 0.4851
       },
       {
         "condition": "+0.3% <= gap < +1%",
         "period": "full",
-        "n": 533595,
+        "n": 533725,
         "mean_oc_bps": 0.5,
         "median_oc_bps": 0.0,
-        "share_up": 0.4965,
-        "t_stat": 2.38,
-        "continuation_rate": 0.4965
+        "share_up": 0.4964,
+        "t_stat": 2.37,
+        "continuation_rate": 0.4964
       },
       {
         "condition": "+1% <= gap < +2%",
         "period": "full",
-        "n": 169931,
+        "n": 169999,
         "mean_oc_bps": 6.5,
         "median_oc_bps": 4.1,
         "share_up": 0.5075,
@@ -83,332 +83,332 @@
       {
         "condition": "+2% <= gap < +5%",
         "period": "full",
-        "n": 62228,
-        "mean_oc_bps": 1.0,
+        "n": 62268,
+        "mean_oc_bps": 0.9,
         "median_oc_bps": -6.8,
         "share_up": 0.4881,
-        "t_stat": 0.75,
+        "t_stat": 0.74,
         "continuation_rate": 0.4881
       },
       {
         "condition": "gap >= +5%",
         "period": "full",
-        "n": 12533,
+        "n": 12551,
         "mean_oc_bps": 24.5,
         "median_oc_bps": 0.0,
-        "share_up": 0.4994,
-        "t_stat": 5.48,
-        "continuation_rate": 0.4994
+        "share_up": 0.4991,
+        "t_stat": 5.49,
+        "continuation_rate": 0.4991
       },
       {
         "condition": "gap <= -5%",
         "period": "last_24m",
-        "n": 2663,
-        "mean_oc_bps": -16.9,
-        "median_oc_bps": -21.4,
-        "share_up": 0.4848,
-        "t_stat": -1.61,
-        "continuation_rate": 0.5145
+        "n": 2674,
+        "mean_oc_bps": -17.5,
+        "median_oc_bps": -21.3,
+        "share_up": 0.485,
+        "t_stat": -1.66,
+        "continuation_rate": 0.5142
       },
       {
         "condition": "-5% < gap <= -2%",
         "period": "last_24m",
-        "n": 14034,
-        "mean_oc_bps": 28.9,
-        "median_oc_bps": 37.7,
-        "share_up": 0.5522,
-        "t_stat": 10.08,
-        "continuation_rate": 0.4452
-      },
-      {
-        "condition": "-2% < gap <= -1%",
-        "period": "last_24m",
-        "n": 33645,
-        "mean_oc_bps": 24.0,
-        "median_oc_bps": 22.0,
-        "share_up": 0.5477,
-        "t_stat": 17.82,
-        "continuation_rate": 0.4492
-      },
-      {
-        "condition": "-1% < gap <= -0.3%",
-        "period": "last_24m",
-        "n": 87616,
-        "mean_oc_bps": 6.8,
-        "median_oc_bps": 7.9,
-        "share_up": 0.5221,
-        "t_stat": 10.87,
-        "continuation_rate": 0.4739
-      },
-      {
-        "condition": "flat (|gap| < 0.3%)",
-        "period": "last_24m",
-        "n": 155548,
-        "mean_oc_bps": -0.4,
-        "median_oc_bps": 0.0,
-        "share_up": 0.4981,
-        "t_stat": -1.01,
-        "continuation_rate": 0.4835
-      },
-      {
-        "condition": "+0.3% <= gap < +1%",
-        "period": "last_24m",
-        "n": 100756,
-        "mean_oc_bps": -2.6,
-        "median_oc_bps": -4.8,
-        "share_up": 0.4838,
-        "t_stat": -4.67,
-        "continuation_rate": 0.4838
-      },
-      {
-        "condition": "+1% <= gap < +2%",
-        "period": "last_24m",
-        "n": 37712,
-        "mean_oc_bps": -1.5,
-        "median_oc_bps": -6.5,
-        "share_up": 0.4845,
-        "t_stat": -1.27,
-        "continuation_rate": 0.4845
-      },
-      {
-        "condition": "+2% <= gap < +5%",
-        "period": "last_24m",
-        "n": 15346,
-        "mean_oc_bps": -32.1,
-        "median_oc_bps": -34.2,
-        "share_up": 0.446,
-        "t_stat": -12.57,
+        "n": 14031,
+        "mean_oc_bps": 28.8,
+        "median_oc_bps": 37.1,
+        "share_up": 0.5514,
+        "t_stat": 10.03,
         "continuation_rate": 0.446
       },
       {
+        "condition": "-2% < gap <= -1%",
+        "period": "last_24m",
+        "n": 33735,
+        "mean_oc_bps": 24.2,
+        "median_oc_bps": 22.2,
+        "share_up": 0.5482,
+        "t_stat": 17.98,
+        "continuation_rate": 0.4486
+      },
+      {
+        "condition": "-1% < gap <= -0.3%",
+        "period": "last_24m",
+        "n": 87826,
+        "mean_oc_bps": 6.8,
+        "median_oc_bps": 7.9,
+        "share_up": 0.5221,
+        "t_stat": 10.94,
+        "continuation_rate": 0.4738
+      },
+      {
+        "condition": "flat (|gap| < 0.3%)",
+        "period": "last_24m",
+        "n": 155676,
+        "mean_oc_bps": -0.5,
+        "median_oc_bps": 0.0,
+        "share_up": 0.4978,
+        "t_stat": -1.16,
+        "continuation_rate": 0.4833
+      },
+      {
+        "condition": "+0.3% <= gap < +1%",
+        "period": "last_24m",
+        "n": 100372,
+        "mean_oc_bps": -2.7,
+        "median_oc_bps": -5.0,
+        "share_up": 0.4833,
+        "t_stat": -4.86,
+        "continuation_rate": 0.4833
+      },
+      {
+        "condition": "+1% <= gap < +2%",
+        "period": "last_24m",
+        "n": 37630,
+        "mean_oc_bps": -1.6,
+        "median_oc_bps": -6.7,
+        "share_up": 0.4843,
+        "t_stat": -1.41,
+        "continuation_rate": 0.4843
+      },
+      {
+        "condition": "+2% <= gap < +5%",
+        "period": "last_24m",
+        "n": 15365,
+        "mean_oc_bps": -32.1,
+        "median_oc_bps": -34.2,
+        "share_up": 0.4461,
+        "t_stat": -12.6,
+        "continuation_rate": 0.4461
+      },
+      {
         "condition": "gap >= +5%",
         "period": "last_24m",
-        "n": 3091,
-        "mean_oc_bps": -34.7,
+        "n": 3109,
+        "mean_oc_bps": -34.2,
         "median_oc_bps": -42.5,
-        "share_up": 0.4503,
-        "t_stat": -4.06,
-        "continuation_rate": 0.4503
+        "share_up": 0.4497,
+        "t_stat": -4.01,
+        "continuation_rate": 0.4497
       },
       {
         "condition": "gap <= -5%",
         "period": "last_12m",
-        "n": 1257,
-        "mean_oc_bps": 42.5,
-        "median_oc_bps": 19.1,
-        "share_up": 0.5251,
-        "t_stat": 2.92,
-        "continuation_rate": 0.4733
+        "n": 1258,
+        "mean_oc_bps": 42.6,
+        "median_oc_bps": 20.0,
+        "share_up": 0.5254,
+        "t_stat": 2.93,
+        "continuation_rate": 0.473
       },
       {
         "condition": "-5% < gap <= -2%",
         "period": "last_12m",
-        "n": 7260,
+        "n": 7270,
         "mean_oc_bps": 28.9,
-        "median_oc_bps": 34.3,
-        "share_up": 0.5488,
-        "t_stat": 7.64,
-        "continuation_rate": 0.4481
+        "median_oc_bps": 34.0,
+        "share_up": 0.5486,
+        "t_stat": 7.65,
+        "continuation_rate": 0.4483
       },
       {
         "condition": "-2% < gap <= -1%",
         "period": "last_12m",
-        "n": 18480,
-        "mean_oc_bps": 8.1,
-        "median_oc_bps": 13.6,
-        "share_up": 0.5288,
-        "t_stat": 4.71,
-        "continuation_rate": 0.4676
+        "n": 18545,
+        "mean_oc_bps": 8.5,
+        "median_oc_bps": 14.3,
+        "share_up": 0.5304,
+        "t_stat": 4.99,
+        "continuation_rate": 0.4661
       },
       {
         "condition": "-1% < gap <= -0.3%",
         "period": "last_12m",
-        "n": 45268,
-        "mean_oc_bps": 2.1,
-        "median_oc_bps": 4.7,
-        "share_up": 0.5113,
-        "t_stat": 2.35,
-        "continuation_rate": 0.4849
+        "n": 45207,
+        "mean_oc_bps": 2.6,
+        "median_oc_bps": 5.1,
+        "share_up": 0.5129,
+        "t_stat": 2.92,
+        "continuation_rate": 0.4833
       },
       {
         "condition": "flat (|gap| < 0.3%)",
         "period": "last_12m",
-        "n": 73142,
-        "mean_oc_bps": -0.3,
-        "median_oc_bps": -0.6,
-        "share_up": 0.4947,
-        "t_stat": -0.55,
-        "continuation_rate": 0.483
+        "n": 73005,
+        "mean_oc_bps": -0.0,
+        "median_oc_bps": 0.0,
+        "share_up": 0.4958,
+        "t_stat": -0.04,
+        "continuation_rate": 0.4824
       },
       {
         "condition": "+0.3% <= gap < +1%",
         "period": "last_12m",
-        "n": 48994,
-        "mean_oc_bps": -0.8,
-        "median_oc_bps": -5.6,
-        "share_up": 0.4814,
-        "t_stat": -1.0,
-        "continuation_rate": 0.4814
+        "n": 49043,
+        "mean_oc_bps": -0.7,
+        "median_oc_bps": -5.5,
+        "share_up": 0.4817,
+        "t_stat": -0.89,
+        "continuation_rate": 0.4817
       },
       {
         "condition": "+1% <= gap < +2%",
         "period": "last_12m",
-        "n": 21619,
-        "mean_oc_bps": -3.6,
+        "n": 21664,
+        "mean_oc_bps": -3.5,
         "median_oc_bps": -13.7,
-        "share_up": 0.4698,
-        "t_stat": -2.28,
-        "continuation_rate": 0.4698
+        "share_up": 0.4699,
+        "t_stat": -2.23,
+        "continuation_rate": 0.4699
       },
       {
         "condition": "+2% <= gap < +5%",
         "period": "last_12m",
-        "n": 8470,
-        "mean_oc_bps": -14.1,
-        "median_oc_bps": -22.5,
-        "share_up": 0.4645,
-        "t_stat": -4.17,
-        "continuation_rate": 0.4645
+        "n": 8490,
+        "mean_oc_bps": -13.7,
+        "median_oc_bps": -22.1,
+        "share_up": 0.465,
+        "t_stat": -4.06,
+        "continuation_rate": 0.465
       },
       {
         "condition": "gap >= +5%",
         "period": "last_12m",
-        "n": 1535,
-        "mean_oc_bps": -23.2,
-        "median_oc_bps": -33.1,
-        "share_up": 0.4599,
-        "t_stat": -1.85,
-        "continuation_rate": 0.4599
+        "n": 1548,
+        "mean_oc_bps": -21.7,
+        "median_oc_bps": -32.5,
+        "share_up": 0.4593,
+        "t_stat": -1.75,
+        "continuation_rate": 0.4593
       }
     ],
     "day_two_after_big_move": [
       {
         "condition": "yesterday +10% or more",
         "period": "full",
-        "n": 7543,
-        "mean_oc_bps": -10.5,
-        "median_oc_bps": -15.2,
-        "share_up": 0.4803,
-        "t_stat": -1.87,
-        "continuation_rate": 0.4803
+        "n": 7545,
+        "mean_oc_bps": -10.4,
+        "median_oc_bps": -14.9,
+        "share_up": 0.4806,
+        "t_stat": -1.85,
+        "continuation_rate": 0.4806
       },
       {
         "condition": "yesterday +5% to +10%",
         "period": "full",
-        "n": 37549,
+        "n": 37592,
         "mean_oc_bps": 0.7,
-        "median_oc_bps": -0.9,
-        "share_up": 0.4957,
+        "median_oc_bps": -0.7,
+        "share_up": 0.4958,
         "t_stat": 0.4,
-        "continuation_rate": 0.4957
+        "continuation_rate": 0.4958
       },
       {
         "condition": "yesterday -5% to -10%",
         "period": "full",
-        "n": 35606,
+        "n": 35625,
         "mean_oc_bps": 22.4,
         "median_oc_bps": 17.9,
         "share_up": 0.5242,
         "t_stat": 11.74,
-        "continuation_rate": 0.4723
+        "continuation_rate": 0.4722
       },
       {
         "condition": "yesterday -10% or worse",
         "period": "full",
-        "n": 5999,
-        "mean_oc_bps": 80.2,
-        "median_oc_bps": 51.5,
-        "share_up": 0.5478,
-        "t_stat": 10.16,
-        "continuation_rate": 0.4491
+        "n": 6000,
+        "mean_oc_bps": 80.1,
+        "median_oc_bps": 51.4,
+        "share_up": 0.5475,
+        "t_stat": 10.15,
+        "continuation_rate": 0.4493
       },
       {
         "condition": "yesterday +10% or more",
         "period": "last_24m",
-        "n": 1815,
+        "n": 1812,
         "mean_oc_bps": -55.8,
-        "median_oc_bps": -67.6,
-        "share_up": 0.4198,
-        "t_stat": -5.86,
-        "continuation_rate": 0.4198
+        "median_oc_bps": -67.3,
+        "share_up": 0.42,
+        "t_stat": -5.85,
+        "continuation_rate": 0.42
       },
       {
         "condition": "yesterday +5% to +10%",
         "period": "last_24m",
-        "n": 8836,
-        "mean_oc_bps": 11.6,
+        "n": 8872,
+        "mean_oc_bps": 11.5,
         "median_oc_bps": 4.4,
-        "share_up": 0.5059,
+        "share_up": 0.506,
         "t_stat": 3.49,
-        "continuation_rate": 0.5059
+        "continuation_rate": 0.506
       },
       {
         "condition": "yesterday -5% to -10%",
         "period": "last_24m",
-        "n": 8228,
-        "mean_oc_bps": 43.0,
-        "median_oc_bps": 29.5,
-        "share_up": 0.5467,
+        "n": 8232,
+        "mean_oc_bps": 42.9,
+        "median_oc_bps": 29.7,
+        "share_up": 0.5469,
         "t_stat": 10.68,
-        "continuation_rate": 0.4514
+        "continuation_rate": 0.4512
       },
       {
         "condition": "yesterday -10% or worse",
         "period": "last_24m",
-        "n": 1418,
-        "mean_oc_bps": 13.8,
-        "median_oc_bps": 8.9,
-        "share_up": 0.5092,
-        "t_stat": 1.13,
-        "continuation_rate": 0.4887
+        "n": 1419,
+        "mean_oc_bps": 13.3,
+        "median_oc_bps": 8.4,
+        "share_up": 0.5081,
+        "t_stat": 1.09,
+        "continuation_rate": 0.4898
       },
       {
         "condition": "yesterday +10% or more",
         "period": "last_12m",
         "n": 817,
-        "mean_oc_bps": 26.9,
-        "median_oc_bps": 22.6,
-        "share_up": 0.5263,
-        "t_stat": 1.8,
-        "continuation_rate": 0.5263
+        "mean_oc_bps": 27.4,
+        "median_oc_bps": 23.2,
+        "share_up": 0.5275,
+        "t_stat": 1.83,
+        "continuation_rate": 0.5275
       },
       {
         "condition": "yesterday +5% to +10%",
         "period": "last_12m",
-        "n": 5124,
-        "mean_oc_bps": 26.4,
+        "n": 5158,
+        "mean_oc_bps": 26.2,
         "median_oc_bps": 25.6,
-        "share_up": 0.5379,
-        "t_stat": 5.92,
-        "continuation_rate": 0.5379
+        "share_up": 0.538,
+        "t_stat": 5.89,
+        "continuation_rate": 0.538
       },
       {
         "condition": "yesterday -5% to -10%",
         "period": "last_12m",
-        "n": 4478,
-        "mean_oc_bps": 19.1,
-        "median_oc_bps": 17.9,
-        "share_up": 0.5275,
-        "t_stat": 3.77,
-        "continuation_rate": 0.4707
+        "n": 4486,
+        "mean_oc_bps": 18.8,
+        "median_oc_bps": 18.0,
+        "share_up": 0.5276,
+        "t_stat": 3.72,
+        "continuation_rate": 0.4706
       },
       {
         "condition": "yesterday -10% or worse",
         "period": "last_12m",
-        "n": 641,
-        "mean_oc_bps": -2.6,
-        "median_oc_bps": -3.9,
-        "share_up": 0.4945,
-        "t_stat": -0.14,
-        "continuation_rate": 0.5055
+        "n": 643,
+        "mean_oc_bps": -3.1,
+        "median_oc_bps": -4.1,
+        "share_up": 0.493,
+        "t_stat": -0.17,
+        "continuation_rate": 0.507
       }
     ],
     "three_day_move": [
       {
         "condition": "3-day return <= -15%",
         "period": "full",
-        "n": 8219,
-        "mean_oc_bps": 35.6,
+        "n": 8223,
+        "mean_oc_bps": 35.7,
         "median_oc_bps": 11.9,
         "share_up": 0.5091,
         "t_stat": 5.16
@@ -416,130 +416,130 @@
       {
         "condition": "3-day return -15% to -10%",
         "period": "full",
-        "n": 19768,
-        "mean_oc_bps": 20.6,
+        "n": 19770,
+        "mean_oc_bps": 20.5,
         "median_oc_bps": 11.0,
         "share_up": 0.5134,
-        "t_stat": 7.24
+        "t_stat": 7.2
       },
       {
         "condition": "3-day return >= +15%",
         "period": "full",
-        "n": 11217,
+        "n": 11226,
         "mean_oc_bps": -0.8,
         "median_oc_bps": -5.5,
         "share_up": 0.4912,
-        "t_stat": -0.21
+        "t_stat": -0.19
       },
       {
         "condition": "3-day return <= -15%",
         "period": "last_24m",
-        "n": 1985,
-        "mean_oc_bps": 9.9,
-        "median_oc_bps": -12.0,
-        "share_up": 0.4851,
-        "t_stat": 0.83
+        "n": 1986,
+        "mean_oc_bps": 9.7,
+        "median_oc_bps": -12.4,
+        "share_up": 0.4844,
+        "t_stat": 0.82
       },
       {
         "condition": "3-day return -15% to -10%",
         "period": "last_24m",
-        "n": 4764,
+        "n": 4762,
         "mean_oc_bps": 27.8,
-        "median_oc_bps": 3.8,
-        "share_up": 0.504,
+        "median_oc_bps": 3.9,
+        "share_up": 0.5042,
         "t_stat": 4.48
       },
       {
         "condition": "3-day return >= +15%",
         "period": "last_24m",
-        "n": 2650,
-        "mean_oc_bps": 6.8,
-        "median_oc_bps": 0.3,
-        "share_up": 0.5,
-        "t_stat": 0.88
+        "n": 2657,
+        "mean_oc_bps": 6.9,
+        "median_oc_bps": 0.0,
+        "share_up": 0.4998,
+        "t_stat": 0.9
       },
       {
         "condition": "3-day return <= -15%",
         "period": "last_12m",
-        "n": 834,
-        "mean_oc_bps": 32.8,
+        "n": 836,
+        "mean_oc_bps": 32.7,
         "median_oc_bps": 0.6,
         "share_up": 0.5,
-        "t_stat": 2.25
+        "t_stat": 2.24
       },
       {
         "condition": "3-day return -15% to -10%",
         "period": "last_12m",
-        "n": 2443,
-        "mean_oc_bps": -0.5,
-        "median_oc_bps": -11.2,
-        "share_up": 0.4851,
-        "t_stat": -0.06
+        "n": 2448,
+        "mean_oc_bps": -0.2,
+        "median_oc_bps": -10.8,
+        "share_up": 0.4857,
+        "t_stat": -0.03
       },
       {
         "condition": "3-day return >= +15%",
         "period": "last_12m",
-        "n": 1467,
-        "mean_oc_bps": 19.1,
+        "n": 1464,
+        "mean_oc_bps": 19.3,
         "median_oc_bps": 12.2,
-        "share_up": 0.5201,
-        "t_stat": 1.77
+        "share_up": 0.5191,
+        "t_stat": 1.78
       }
     ],
     "momentum_20d": [
       {
         "condition": "momentum top decile (20d)",
         "period": "full",
-        "n": 229365,
+        "n": 229457,
         "mean_oc_bps": 2.1,
         "median_oc_bps": 2.5,
         "share_up": 0.5041,
-        "t_stat": 4.32
+        "t_stat": 4.33
       },
       {
         "condition": "momentum bottom decile (20d)",
         "period": "full",
-        "n": 229595,
+        "n": 229685,
         "mean_oc_bps": 3.2,
         "median_oc_bps": 1.9,
         "share_up": 0.5025,
-        "t_stat": 6.3
+        "t_stat": 6.32
       },
       {
         "condition": "momentum top decile (20d)",
         "period": "last_24m",
-        "n": 45161,
+        "n": 45162,
         "mean_oc_bps": 2.6,
         "median_oc_bps": 1.6,
         "share_up": 0.5021,
-        "t_stat": 2.13
+        "t_stat": 2.11
       },
       {
         "condition": "momentum bottom decile (20d)",
         "period": "last_24m",
-        "n": 45176,
-        "mean_oc_bps": 2.3,
+        "n": 45177,
+        "mean_oc_bps": 2.2,
         "median_oc_bps": 0.0,
         "share_up": 0.4984,
-        "t_stat": 1.87
+        "t_stat": 1.86
       },
       {
         "condition": "momentum top decile (20d)",
         "period": "last_12m",
-        "n": 22661,
-        "mean_oc_bps": 4.9,
+        "n": 22662,
+        "mean_oc_bps": 5.3,
         "median_oc_bps": 0.0,
-        "share_up": 0.498,
-        "t_stat": 2.7
+        "share_up": 0.4989,
+        "t_stat": 2.92
       },
       {
         "condition": "momentum bottom decile (20d)",
         "period": "last_12m",
-        "n": 22676,
-        "mean_oc_bps": -0.1,
-        "median_oc_bps": -1.4,
-        "share_up": 0.4948,
-        "t_stat": -0.07
+        "n": 22677,
+        "mean_oc_bps": 0.3,
+        "median_oc_bps": -0.9,
+        "share_up": 0.4956,
+        "t_stat": 0.16
       }
     ],
     "base_rate_by_year": [
@@ -569,13 +569,13 @@
       },
       {
         "year": 2020,
-        "n": 211038,
+        "n": 211037,
         "share_up": 0.4965,
         "mean_oc_bps": 0.6
       },
       {
         "year": 2021,
-        "n": 217191,
+        "n": 217192,
         "share_up": 0.5024,
         "mean_oc_bps": 0.7
       },
@@ -599,13 +599,13 @@
       },
       {
         "year": 2025,
-        "n": 224491,
+        "n": 224492,
         "share_up": 0.5098,
         "mean_oc_bps": 4.2
       },
       {
         "year": 2026,
-        "n": 185559,
+        "n": 186461,
         "share_up": 0.4959,
         "mean_oc_bps": 0.9
       }
@@ -614,11 +614,11 @@
       {
         "condition": "SPY all sessions",
         "period": "full",
-        "n": 2720,
+        "n": 2721,
         "mean_oc_bps": 2.3,
         "median_oc_bps": 5.2,
-        "share_up": 0.539,
-        "t_stat": 1.4
+        "share_up": 0.5391,
+        "t_stat": 1.41
       },
       {
         "condition": "SPY gap >= +0.5%",
@@ -662,20 +662,20 @@
         "condition": "SPY all sessions",
         "period": "last_24m",
         "n": 501,
-        "mean_oc_bps": 2.4,
-        "median_oc_bps": 2.8,
-        "share_up": 0.517,
-        "t_stat": 0.6
+        "mean_oc_bps": 2.5,
+        "median_oc_bps": 3.2,
+        "share_up": 0.519,
+        "t_stat": 0.62
       },
       {
         "condition": "SPY gap >= +0.5%",
         "period": "last_24m",
-        "n": 78,
-        "mean_oc_bps": -10.1,
-        "median_oc_bps": -8.5,
-        "share_up": 0.4487,
-        "t_stat": -1.01,
-        "continuation_rate": 0.4487
+        "n": 77,
+        "mean_oc_bps": -9.9,
+        "median_oc_bps": -7.2,
+        "share_up": 0.4545,
+        "t_stat": -0.97,
+        "continuation_rate": 0.4545
       },
       {
         "condition": "SPY gap <= -0.5%",
@@ -710,9 +710,9 @@
         "period": "last_12m",
         "n": 251,
         "mean_oc_bps": 0.6,
-        "median_oc_bps": 0.1,
+        "median_oc_bps": 0.5,
         "share_up": 0.502,
-        "t_stat": 0.14
+        "t_stat": 0.15
       },
       {
         "condition": "SPY gap >= +0.5%",
@@ -737,10 +737,10 @@
       {
         "condition": "SPY after 3 up days",
         "period": "last_12m",
-        "n": 39,
+        "n": 38,
         "mean_oc_bps": -2.2,
-        "median_oc_bps": 0.1,
-        "share_up": 0.5128,
+        "median_oc_bps": 1.2,
+        "share_up": 0.5,
         "t_stat": -0.26
       },
       {
@@ -816,23 +816,23 @@
       },
       {
         "year": 2026,
-        "n": 206,
-        "share_up": 0.5049,
-        "mean_oc_bps": 1.9
+        "n": 207,
+        "share_up": 0.5072,
+        "mean_oc_bps": 2.0
       }
     ]
   },
   "verdicts": {
-    "long a stock that gapped up 2-5% (continuation)": "no reliable edge (mean +1.0 bps, t = 0.75, n = 62,228)",
-    "long a stock that gapped up 5%+ (continuation)": "supported: +24.5 bps/session for that side, clears 4 bps costs (t = 5.48, n = 12,533)",
-    "short a stock that gapped down 2-5% (continuation)": "goes the other way: -20.9 bps/session for that side (t = -15.45, n = 58,982)",
-    "short a stock that gapped down 5%+ (continuation)": "supported: +43.6 bps/session for that side, clears 4 bps costs (t = 8.25, n = 11,843)",
-    "fade a +5% gap (short)": "goes the other way: -24.5 bps/session for that side (t = -5.48, n = 12,533)",
-    "fade a -5% gap (long)": "goes the other way: -43.6 bps/session for that side (t = -8.25, n = 11,843)",
-    "day-two fade after a +10% day (short)": "no reliable edge (mean -10.5 bps, t = -1.87, n = 7,543)",
-    "day-two bounce after a -10% day (long)": "supported: +80.2 bps/session for that side, clears 4 bps costs (t = 10.16, n = 5,999)",
-    "oversold bounce after a -15% three-day drop (long)": "supported: +35.6 bps/session for that side, clears 4 bps costs (t = 5.16, n = 8,219)",
-    "20-day momentum top decile (long)": "positive but inside costs (+2.1 bps vs 4 bps, t = 4.32, n = 229,365)",
-    "20-day momentum bottom decile (short)": "goes the other way: -3.2 bps/session for that side (t = -6.3, n = 229,595)"
+    "long a stock that gapped up 2-5% (continuation)": "no reliable edge (mean +0.9 bps, t = 0.74, n = 62,268)",
+    "long a stock that gapped up 5%+ (continuation)": "supported: +24.5 bps/session for that side, clears 4 bps costs (t = 5.49, n = 12,551)",
+    "short a stock that gapped down 2-5% (continuation)": "goes the other way: -21.0 bps/session for that side (t = -15.48, n = 59,011)",
+    "short a stock that gapped down 5%+ (continuation)": "supported: +43.7 bps/session for that side, clears 4 bps costs (t = 8.26, n = 11,853)",
+    "fade a +5% gap (short)": "goes the other way: -24.5 bps/session for that side (t = -5.49, n = 12,551)",
+    "fade a -5% gap (long)": "goes the other way: -43.7 bps/session for that side (t = -8.26, n = 11,853)",
+    "day-two fade after a +10% day (short)": "no reliable edge (mean -10.4 bps, t = -1.85, n = 7,545)",
+    "day-two bounce after a -10% day (long)": "supported: +80.1 bps/session for that side, clears 4 bps costs (t = 10.15, n = 6,000)",
+    "oversold bounce after a -15% three-day drop (long)": "supported: +35.7 bps/session for that side, clears 4 bps costs (t = 5.16, n = 8,223)",
+    "20-day momentum top decile (long)": "positive but inside costs (+2.1 bps vs 4 bps, t = 4.33, n = 229,457)",
+    "20-day momentum bottom decile (short)": "goes the other way: -3.2 bps/session for that side (t = -6.32, n = 229,685)"
   }
 }
