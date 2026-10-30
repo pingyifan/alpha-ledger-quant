@@ -1,0 +1,61 @@
+name: model tournament (weekly)
+
+on:
+  schedule:
+    - cron: "0 14 * * 6"   # Saturdays 14:00 UTC, after Friday's nightly run
+  workflow_dispatch:
+    inputs:
+      models:
+        description: "models to run (lgb,lgb_bench,xgb,cat,densemble,linear,mlp)"
+        required: false
+        default: "lgb,xgb,cat,densemble,linear"
+      horizons:
+        description: "horizons (keys of config.MODELS)"
+        required: false
+        default: "cc,oc"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nightly
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      PYTHONUNBUFFERED: "1"
+      MLFLOW_ALLOW_FILE_STORE: "true"
+      MLFLOW_DISABLE_AGENT_HINT: "1"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install torch --index-url https://download.pytorch.org/whl/cpu || true
+      - name: Fetch the rolling price panel
+        run: |
+          mkdir -p data
+          curl -sSL -o /tmp/panel.tar.gz https://github.com/${{ github.repository }}/releases/download/panel/panel.tar.gz
+          tar -xzf /tmp/panel.tar.gz -C data
+          ls data/csv | wc -l
+      - name: Build the Qlib store
+        run: python -m pipeline.run_all --steps bin
+      - name: Tournament
+        run: python -m research.model_tournament --models "${{ github.event.inputs.models || 'lgb,xgb,cat,densemble,linear' }}" --horizons "${{ github.event.inputs.horizons || 'cc,oc' }}" 2>&1 | grep -v "it/s\]" | tee tournament.log
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "alpha-ledger-bot"
+          git config user.email "alpha-ledger-bot@users.noreply.github.com"
+          git add output/tournament.json output/tournament.md
+          git diff --cached --quiet || (git commit -m "tournament: weekly model comparison" && git pull --rebase origin ${GITHUB_REF_NAME} && git push origin HEAD:${GITHUB_REF_NAME})
+          gh release upload panel tournament.log --clobber || true

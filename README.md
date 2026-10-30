@@ -114,3 +114,20 @@ research/label_experiments.py   horizon and parameter comparison
 ```
 
 Qlib is MIT-licensed; `pipeline/vendor/QLIB_LICENSE` is its license file.
+
+## Added 2026-10-29: open-aware "gap" model, quote relay, weekly tournament
+
+- **Gap model** (`pipeline/gapmodel.py`, nightly step `gapmodel`): a LightGBM classifier on features known at the 9:30 open
+  (overnight gap raw / vs SPY / vs the stock's ATR, yesterday's move, 5/20/60-day momentum, volume, range position, SPY state,
+  market and sector median gap, day of week). Label = open-to-close return **minus the day's cross-sectional median** (the
+  absolute-sign label had no out-of-sample signal: AUC 0.50; the relative label is 0.52–0.54 every year since 2021).
+  Walk-forward 2021–2026: top-5 longs right 57% of the time (+21 bps/day), bottom-5 shorts 55% (+22 bps), decile spread
+  ~21 bps/day before the 4 bps round trip. Outputs `gapmodel.txt`, `gap_static.csv`, `gapmodel_card.json` (walk-forward table,
+  calibration, gate), `gap_report.md`. Live scoring: `pipeline/gap_score.py` with the relay snapshot.
+- **Quote relay** (`.github/workflows/quotes.yml`, `pipeline/quotes.py`): every 5 minutes during the US session, one yfinance
+  batch of the universe's daily bars (Open = official open, Close = last trade) published as the rolling release asset
+  `quotes/quotes_latest.json` plus a per-day snapshot CSV. The ledger's scheduled sessions read this instead of quote pages.
+- **Weekly tournament** (`.github/workflows/tournament.yml`, `research/model_tournament.py`): LightGBM, XGBoost, CatBoost,
+  DoubleEnsemble and ridge on the Alpha158 features for both horizons, same split as the nightly model. A challenger is
+  promoted to champion for a horizon only after beating the incumbent by ≥0.005 Rank IC and ≥1 pt top-5 hit rate on two
+  consecutive weeks; the nightly `train` step then uses the champion (`pipeline/train.champion_for`).

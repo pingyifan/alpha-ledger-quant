@@ -11,3 +11,5 @@ loguru
 tqdm
 requests
 lxml
+xgboost>=2.0
+catboost>=1.2

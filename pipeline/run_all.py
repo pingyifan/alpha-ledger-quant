@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from . import config
 
 log = logging.getLogger("pipeline")
-ALL_STEPS = ["universe", "download", "bin", "train", "score", "evaluate", "priors"]
+ALL_STEPS = ["universe", "download", "bin", "train", "score", "evaluate", "priors", "gapmodel"]
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -86,6 +86,9 @@ def main(argv: list[str] | None = None) -> int:
     if "priors" in steps:
         from .priors import run_priors
         run("priors", lambda: {k: run_priors().get(k) for k in ("panel", "verdicts")})
+    if "gapmodel" in steps:
+        from .gapmodel import train_gapmodel
+        run("gapmodel", train_gapmodel)
 
     status["finished_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     try:

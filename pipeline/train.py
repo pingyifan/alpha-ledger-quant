@@ -65,13 +65,24 @@ def label_lag(expr: str) -> int:
     return max(lags) if lags else 1
 
 
+def champion_for(key: str) -> str:
+    """Model type the weekly tournament has promoted for this horizon ("lgb" unless beaten twice)."""
+    try:
+        return json.load(open(config.OUTPUT_DIR / "tournament.json")).get("champions", {}).get(key, "lgb")
+    except Exception:  # noqa: BLE001
+        return "lgb"
+
+
 def train(key: str = config.DEFAULT_MODEL, params: dict | None = None,
           num_boost_round: int | None = None, early_stopping_rounds: int | None = None,
-          refit: bool = True) -> TrainResult:
+          refit: bool = True, model_name: str | None = None) -> TrainResult:
     from qlib.contrib.model.gbdt import LGBModel
     from qlib.data.dataset import DatasetH
 
     spec = config.MODELS[key]
+    model_name = model_name or champion_for(key)
+    if model_name != "lgb":
+        return _train_champion(key, model_name, refit)
     params = dict(params or config.LGB_PARAMS)
     nbr = num_boost_round or config.NUM_BOOST_ROUND
     esr = config.EARLY_STOPPING_ROUNDS if early_stopping_rounds is None else early_stopping_rounds
@@ -133,6 +144,37 @@ def train(key: str = config.DEFAULT_MODEL, params: dict | None = None,
     return TrainResult(key=key, model=final, dataset=dataset_final, handler=handler, pred_valid=pred_valid,
                        label_valid=label_valid, dates={k: str(v.date()) for k, v in d.items()},
                        best_iteration=best_iter, valid_metrics=valid_metrics, feature_importance=feature_importance)
+
+
+def _train_champion(key: str, model_name: str, refit: bool) -> TrainResult:
+    """Same split as the LightGBM path, with a model type promoted by the tournament."""
+    from qlib.data.dataset import DatasetH
+    from research.model_tournament import build_model
+
+    spec = config.MODELS[key]
+    init_qlib()
+    cal = calendar()
+    d = _segments(cal, label_lag(spec["label"]))
+    log.info("[%s] champion %s: train %s..%s | valid %s..%s", key, model_name, d["start"].date(), d["train_end"].date(),
+             d["valid_start"].date(), d["valid_end"].date())
+    handler = make_handler(d["start"], d["end"], d["start"], d["train_end"], label_expr=spec["label"])
+    dataset = DatasetH(handler=handler, segments={"train": (d["start"], d["train_end"]), "valid": (d["valid_start"], d["valid_end"]),
+                                                  "test": (d["end"], d["end"])})
+    model = build_model(model_name)
+    model.fit(dataset)
+    pred_valid = model.predict(dataset, segment="valid")
+    pred_valid.name = "score"
+    label_valid = raw_label(handler, d["valid_start"], d["valid_end"]).reindex(pred_valid.index)
+    valid_metrics = _ic_summary(pred_valid, label_valid)
+    valid_metrics["model_type"] = model_name
+    final, dataset_final = model, dataset
+    if refit:
+        dataset_final = DatasetH(handler=handler, segments={"train": (d["start"], d["valid_end"]), "valid": (cal[-22], d["valid_end"]),
+                                                            "test": (d["end"], d["end"])})
+        final = build_model(model_name)
+        final.fit(dataset_final)
+    return TrainResult(key=key, model=final, dataset=dataset_final, handler=handler, pred_valid=pred_valid, label_valid=label_valid,
+                       dates={k: str(v.date()) for k, v in d.items()}, best_iteration=0, valid_metrics=valid_metrics, feature_importance={})
 
 
 def _ic_summary(pred: pd.Series, label: pd.Series) -> dict:

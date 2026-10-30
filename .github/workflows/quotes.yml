@@ -1,0 +1,55 @@
+name: quote relay
+
+on:
+  schedule:
+    # every 5 minutes, 13:00–21:59 UTC on weekdays (covers 9:25–16:15 ET in both EDT and EST;
+    # the script itself skips outside the session and on holidays)
+    - cron: "*/5 13-21 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "run even when the market is closed (test)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: quotes
+  cancel-in-progress: true
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      PYTHONUNBUFFERED: "1"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install (light)
+        run: |
+          python -m pip install --upgrade pip
+          pip install "yfinance>=0.2.50" "pandas>=2.0,<2.3" "numpy<2" requests lxml
+      - name: Pull today's snapshot file so the day's history keeps appending
+        run: |
+          mkdir -p quotes_out
+          TODAY=$(TZ=America/New_York date +%F)
+          gh release download quotes -p "snapshots_${TODAY}.csv" -D quotes_out 2>/dev/null || true
+      - name: Snapshot
+        run: |
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then python -m pipeline.quotes --force; else python -m pipeline.quotes; fi
+      - name: Publish as the rolling "quotes" release
+        run: |
+          if [ -f quotes_out/quotes_latest.json ]; then
+            gh release view quotes >/dev/null 2>&1 || gh release create quotes --title "Intraday quote relay (rolling)" --notes "quotes_latest.json is replaced every five minutes during the US session; snapshots_<date>.csv holds every snapshot of that day. Raw prices from Yahoo via yfinance, a few minutes behind the tape. Research input only." --latest=false
+            gh release upload quotes quotes_out/quotes_latest.json --clobber
+            for f in quotes_out/snapshots_*.csv; do [ -f "$f" ] && gh release upload quotes "$f" --clobber; done
+          fi
