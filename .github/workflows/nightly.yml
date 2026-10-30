@@ -41,8 +41,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Keep the tournament's champions (written by the weekly workflow)
-        run: ls -la output/tournament.json 2>/dev/null || echo "no tournament yet: LightGBM is the champion for every horizon"
+      - name: Show the tournament champions, if any
+        run: |
+          ls -la output/tournament.json 2>/dev/null || echo "no tournament yet - LightGBM is the champion for every horizon"
       - name: Run pipeline
         run: python -m pipeline.run_all --steps "${{ github.event.inputs.steps || 'universe,download,bin,train,score,evaluate,priors,gapmodel' }}"
 
