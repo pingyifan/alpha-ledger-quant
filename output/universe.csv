@@ -340,7 +340,7 @@ FN,Fabrinet,Information Technology,SP400
 FNB,FNB Corporation,Financials,SP400
 FND,Floor & Decor,Consumer Discretionary,SP400
 FNF,Fidelity National Financial,Financials,SP400
-FORM,"FormFactor, Inc.",Information Technology,SP400
+FORM,FormFactor,Information Technology,SP400
 FOUR,Shift4,Financials,SP400
 FOX,Fox Corporation (Class B),Communication Services,SP500
 FOXA,Fox Corporation (Class A),Communication Services,SP500
@@ -365,6 +365,7 @@ GGG,Graco Inc.,Industrials,SP400
 GHC,Graham Holdings,Consumer Discretionary,SP400
 GILD,Gilead Sciences,Health Care,SP500
 GIS,General Mills,Consumer Staples,SP500
+GKOS,Glaukos,Health Care,SP400
 GL,Globe Life,Financials,SP500
 GLPI,Gaming and Leisure Properties,Real Estate,SP400
 GLW,Corning Inc.,Information Technology,SP500
@@ -478,7 +479,6 @@ KRC,Kilroy Realty Corp,Real Estate,SP400
 KRG,Kite Realty Group Trust,Real Estate,SP400
 KRYS,Krystal Biotech,Health Care,SP400
 KTOS,Kratos Defense & Security Solutions,Industrials,SP400
-KVUE,Kenvue,Consumer Staples,SP500
 L,Loews Corporation,Financials,SP500
 LAD,Lithia Motors,Consumer Discretionary,SP400
 LAMR,Lamar Advertising Company,Real Estate,SP400
@@ -604,7 +604,7 @@ OGE,OGE Energy,Utilities,SP400
 OGS,One Gas,Utilities,SP400
 OHI,Omega Healthcare Investors,Real Estate,SP400
 OKE,Oneok,Energy,SP500
-OKTA,"Okta, Inc.",Information Technology,SP400
+OKTA,"Okta, Inc.",Information Technology,SP500
 OLED,Universal Display,Information Technology,SP400
 OLLI,Ollie's Bargain Outlet,Consumer Discretionary,SP400
 OMC,Omnicom Group,Communication Services,SP500
