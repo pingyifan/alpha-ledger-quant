@@ -1,4 +1,4 @@
-# Gap model (open-aware direction) — data to 2026-11-06
+# Gap model (open-aware direction) — data to 2026-11-09
 
 P(open-to-close return beats the day's median) from what is known at the 9:30 open: the overnight gap (raw, vs SPY, vs the stock's ATR), yesterday's move, 5/20/60-day momentum, volume, range position, SPY's gap and momentum, the market's and the sector's median gap, day of week.
 
@@ -6,41 +6,41 @@ P(open-to-close return beats the day's median) from what is known at the 9:30 op
 
 | year | rows | AUC (vs median) | AUC (abs) | top-3 long / short hit | top-5 long hit / bps | bottom-5 short hit / bps | D10−D1 bps/day |
 |---|---|---|---|---|---|---|---|
-| 2021 | 216,664 | 0.538 | 0.532 | 0.564 / 0.579 | 0.567 / 22.6 | 0.574 / 40.5 | 36.4 |
-| 2022 | 219,035 | 0.522 | 0.526 | 0.538 / 0.555 | 0.543 / 3.8 | 0.551 / 18.9 | 13.6 |
-| 2023 | 219,898 | 0.525 | 0.519 | 0.568 / 0.529 | 0.574 / 30.5 | 0.527 / 8.7 | 15.7 |
-| 2024 | 224,765 | 0.531 | 0.528 | 0.609 / 0.554 | 0.591 / 26.5 | 0.552 / 17.6 | 16.6 |
-| 2025 | 224,391 | 0.531 | 0.520 | 0.604 / 0.591 | 0.598 / 43.8 | 0.578 / 28.7 | 18.6 |
-| 2026 | 192,666 | 0.521 | 0.518 | 0.590 / 0.573 | 0.588 / 24.5 | 0.544 / 20.6 | 13.2 |
+| 2021 | 216,160 | 0.539 | 0.531 | 0.586 / 0.587 | 0.579 / 29.0 | 0.586 / 51.5 | 39.6 |
+| 2022 | 218,533 | 0.524 | 0.526 | 0.530 / 0.579 | 0.537 / -0.8 | 0.555 / 24.5 | 16.3 |
+| 2023 | 219,398 | 0.524 | 0.516 | 0.588 / 0.517 | 0.569 / 18.8 | 0.530 / 7.8 | 13.6 |
+| 2024 | 224,261 | 0.531 | 0.528 | 0.605 / 0.549 | 0.581 / 23.5 | 0.547 / 18.9 | 17.4 |
+| 2025 | 223,891 | 0.531 | 0.523 | 0.561 / 0.603 | 0.572 / 28.5 | 0.586 / 37.6 | 18.1 |
+| 2026 | 193,138 | 0.522 | 0.518 | 0.594 / 0.564 | 0.584 / 27.1 | 0.567 / 30.5 | 13.5 |
 
 ## Pooled out-of-sample
 
-- p0.55: {'coverage': 0.056, 'n': 72656, 'hit_rate': 0.5472, 'mean_bps': 19.5, 'longs': 40059, 'shorts': 32597}
-- p0.57: {'coverage': 0.0099, 'n': 12832, 'hit_rate': 0.5712, 'mean_bps': 41.2, 'longs': 7103, 'shorts': 5729}
-- p0.60: {'coverage': 0.0008, 'n': 1067, 'hit_rate': 0.6373, 'mean_bps': 83.5, 'longs': 606, 'shorts': 461}
-- p0.63: {'coverage': 0.0001, 'n': 98, 'hit_rate': 0.7041, 'mean_bps': 145.7, 'longs': 65, 'shorts': 33}
-- top3: {'k': 3, 'days': 1469, 'long_hit_rate': 0.5784, 'short_hit_rate': 0.5634, 'long_bps': 26.2, 'short_bps': 28.5, 'ls_bps': 27.4}
-- topk: {'k': 5, 'days': 1469, 'long_hit_rate': 0.5766, 'short_hit_rate': 0.5544, 'long_bps': 25.3, 'short_bps': 22.6, 'ls_bps': 23.9}
-- top10: {'k': 10, 'days': 1469, 'long_hit_rate': 0.5691, 'short_hit_rate': 0.5457, 'long_bps': 21.8, 'short_bps': 17.8, 'ls_bps': 19.8}
-- decile_spread_bps: 19.1
-- auc_rel: 0.5284
-- base_up_rate: 0.5046
-- accuracy_at_half: 0.5171
-- auc: 0.524
+- p0.55: {'coverage': 0.0592, 'n': 76645, 'hit_rate': 0.5461, 'mean_bps': 19.5, 'longs': 42657, 'shorts': 33988}
+- p0.57: {'coverage': 0.012, 'n': 15563, 'hit_rate': 0.5642, 'mean_bps': 34.7, 'longs': 8444, 'shorts': 7119}
+- p0.60: {'coverage': 0.0015, 'n': 1945, 'hit_rate': 0.6051, 'mean_bps': 55.3, 'longs': 1064, 'shorts': 881}
+- p0.63: {'coverage': 0.0002, 'n': 225, 'hit_rate': 0.6756, 'mean_bps': 138.9, 'longs': 127, 'shorts': 98}
+- top3: {'k': 3, 'days': 1470, 'long_hit_rate': 0.5769, 'short_hit_rate': 0.5667, 'long_bps': 22.1, 'short_bps': 33.8, 'ls_bps': 27.9}
+- topk: {'k': 5, 'days': 1470, 'long_hit_rate': 0.5701, 'short_hit_rate': 0.5616, 'long_bps': 20.9, 'short_bps': 28.4, 'ls_bps': 24.6}
+- top10: {'k': 10, 'days': 1470, 'long_hit_rate': 0.5634, 'short_hit_rate': 0.5514, 'long_bps': 19.8, 'short_bps': 21.3, 'ls_bps': 20.5}
+- decile_spread_bps: 19.8
+- auc_rel: 0.5288
+- base_up_rate: 0.5048
+- accuracy_at_half: 0.5174
+- auc: 0.5241
 
 ## Calibration (out of sample): predicted P(up) bin -> observed up rate
 
 | bin | n | mean p | up rate |
 |---|---|---|---|
-| 0.00–0.40 | 461 | 0.389 | 0.386 |
-| 0.40–0.45 | 32,136 | 0.439 | 0.467 |
-| 0.45–0.48 | 293,643 | 0.469 | 0.481 |
-| 0.48–0.50 | 366,186 | 0.490 | 0.496 |
-| 0.50–0.52 | 329,293 | 0.509 | 0.513 |
-| 0.52–0.55 | 235,641 | 0.532 | 0.532 |
-| 0.55–0.60 | 39,453 | 0.561 | 0.556 |
-| 0.60–1.00 | 606 | 0.613 | 0.655 |
+| 0.00–0.40 | 881 | 0.386 | 0.412 |
+| 0.40–0.45 | 33,107 | 0.439 | 0.466 |
+| 0.45–0.48 | 292,892 | 0.469 | 0.482 |
+| 0.48–0.50 | 365,678 | 0.490 | 0.495 |
+| 0.50–0.52 | 325,056 | 0.509 | 0.514 |
+| 0.52–0.55 | 235,110 | 0.532 | 0.532 |
+| 0.55–0.60 | 41,593 | 0.561 | 0.553 |
+| 0.60–1.00 | 1,064 | 0.615 | 0.619 |
 
 Gate: pooled walk-forward top-5 long hit rate >= 0.55 AND top-5 short hit rate >= 0.53 AND long-short >= +10 bps/day before costs, and the latest test year's top-5 long >= 0.53 → **PASS**
 
-Top features by gain: sector_gap_med (27946), gap_idio (27298), gap_z (16834), sector_id (15263), mkt_gap_med (15212), spy_gap (12435), spy_mom5 (11175), spy_cc_prev (10499)
+Top features by gain: gap_idio (26794), sector_gap_med (26006), gap_z (16479), mkt_gap_med (14491), sector_id (13079), spy_gap (12259), spy_mom5 (10776), spy_cc_prev (9388)
