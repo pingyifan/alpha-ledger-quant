@@ -453,6 +453,7 @@ JBHT,J.B. Hunt,Industrials,SP500
 JBL,Jabil,Information Technology,SP500
 JCI,Johnson Controls,Industrials,SP500
 JEF,Jefferies,Financials,SP400
+JHX,James Hardie Industries,Materials,SP400
 JKHY,Jack Henry & Associates,Financials,SP500
 JLL,Jones Lang LaSalle,Real Estate,SP400
 JNJ,Johnson & Johnson,Health Care,SP500
@@ -694,7 +695,6 @@ RMD,ResMed,Health Care,SP500
 RNR,RenaissanceRe,Financials,SP400
 ROIV,Roivant Sciences,Health Care,SP400
 ROK,Rockwell Automation,Industrials,SP500
-ROKU,"Roku, Inc.",Communication Services,SP400
 ROL,"Rollins, Inc.",Industrials,SP500
 ROP,Roper Technologies,Information Technology,SP500
 ROST,Ross Stores,Consumer Discretionary,SP500
