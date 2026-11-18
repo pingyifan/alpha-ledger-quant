@@ -108,7 +108,6 @@ BIIB,Biogen,Health Care,SP500
 BILL,Bill Holdings,Information Technology,SP400
 BIO,Bio-Rad Laboratories,Health Care,SP400
 BJ,BJ's Wholesale Club,Consumer Staples,SP400
-BKH,Black Hills Corporation,Utilities,SP400
 BKNG,Booking Holdings,Consumer Discretionary,SP500
 BKR,Baker Hughes,Energy,SP500
 BLK,BlackRock,Financials,SP500
@@ -420,6 +419,7 @@ HUM,Humana,Health Care,SP500
 HWC,Hancock Whitney,Financials,SP400
 HWM,Howmet Aerospace,Industrials,SP500
 HXL,Hexcel,Industrials,SP400
+HZN,Bright Horizon Energy Corporation,Utilities,SP400
 IBKR,Interactive Brokers,Financials,SP500
 IBM,IBM,Information Technology,SP500
 IBOC,Intl Bancshares Corp,Financials,SP400
