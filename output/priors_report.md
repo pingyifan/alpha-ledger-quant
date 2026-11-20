@@ -1,129 +1,129 @@
 # Playbook priors, backtested on the full panel
 
-900 tickers, 2016-01-04 to 2026-11-18, 2,345,205 stock-days (2,294,000 pass the ledger's price and liquidity filter). Every row measures the **open-to-close return of the session after the condition is known**, before costs; the ledger pays about 4 bps per round trip. Continuation = share of sessions where the open-to-close move had the same sign as the gap or the prior move.
+900 tickers, 2016-01-04 to 2026-11-19, 2,343,630 stock-days (2,292,386 pass the ledger's price and liquidity filter). Every row measures the **open-to-close return of the session after the condition is known**, before costs; the ledger pays about 4 bps per round trip. Continuation = share of sessions where the open-to-close move had the same sign as the gap or the prior move.
 
 ## Verdicts on the playbook's priors
 
 | Prior | Verdict |
 |---|---|
-| long a stock that gapped up 2-5% (continuation) | no reliable edge (mean +1.9 bps, t = 1.49, n = 62,913) |
-| long a stock that gapped up 5%+ (continuation) | supported: +23.7 bps/session for that side, clears 4 bps costs (t = 5.36, n = 12,685) |
-| short a stock that gapped down 2-5% (continuation) | goes the other way: -20.1 bps/session for that side (t = -14.95, n = 59,573) |
-| short a stock that gapped down 5%+ (continuation) | supported: +45.1 bps/session for that side, clears 4 bps costs (t = 8.62, n = 12,024) |
-| fade a +5% gap (short) | goes the other way: -23.7 bps/session for that side (t = -5.36, n = 12,685) |
-| fade a -5% gap (long) | goes the other way: -45.1 bps/session for that side (t = -8.62, n = 12,024) |
-| day-two fade after a +10% day (short) | no reliable edge (mean -9.8 bps, t = -1.76, n = 7,570) |
-| day-two bounce after a -10% day (long) | supported: +72.4 bps/session for that side, clears 4 bps costs (t = 9.3, n = 6,103) |
-| oversold bounce after a -15% three-day drop (long) | supported: +34.3 bps/session for that side, clears 4 bps costs (t = 5.06, n = 8,379) |
-| 20-day momentum top decile (long) | positive but inside costs (+2.0 bps vs 4 bps, t = 4.23, n = 230,244) |
-| 20-day momentum bottom decile (short) | goes the other way: -2.8 bps/session for that side (t = -5.47, n = 230,456) |
+| long a stock that gapped up 2-5% (continuation) | no reliable edge (mean +1.5 bps, t = 1.21, n = 63,024) |
+| long a stock that gapped up 5%+ (continuation) | supported: +23.6 bps/session for that side, clears 4 bps costs (t = 5.34, n = 12,719) |
+| short a stock that gapped down 2-5% (continuation) | goes the other way: -20.0 bps/session for that side (t = -14.85, n = 59,588) |
+| short a stock that gapped down 5%+ (continuation) | supported: +45.2 bps/session for that side, clears 4 bps costs (t = 8.64, n = 12,052) |
+| fade a +5% gap (short) | goes the other way: -23.6 bps/session for that side (t = -5.34, n = 12,719) |
+| fade a -5% gap (long) | goes the other way: -45.2 bps/session for that side (t = -8.64, n = 12,052) |
+| day-two fade after a +10% day (short) | no reliable edge (mean -9.6 bps, t = -1.72, n = 7,604) |
+| day-two bounce after a -10% day (long) | supported: +70.8 bps/session for that side, clears 4 bps costs (t = 9.1, n = 6,120) |
+| oversold bounce after a -15% three-day drop (long) | supported: +34.3 bps/session for that side, clears 4 bps costs (t = 5.06, n = 8,394) |
+| 20-day momentum top decile (long) | positive but inside costs (+2.0 bps vs 4 bps, t = 4.25, n = 230,087) |
+| 20-day momentum bottom decile (short) | goes the other way: -2.7 bps/session for that side (t = -5.19, n = 230,316) |
 
 ## 1. Overnight gap -> open-to-close
 
 | Condition | Period | n | Mean OC (bps) | Median (bps) | Share up | Continuation | t |
 |---|---|---|---|---|---|---|---|
-| gap <= -5% | full | 12,024 | -45.1 | -39.4 | 46.3% | 53.4% | -8.62 |
-| -5% < gap <= -2% | full | 59,573 | +20.1 | +18.5 | 52.5% | 47.1% | 14.95 |
-| -2% < gap <= -1% | full | 148,079 | +9.7 | +13.2 | 52.7% | 46.8% | 16.08 |
-| -1% < gap <= -0.3% | full | 422,572 | +2.8 | +7.9 | 52.1% | 47.3% | 10.54 |
-| flat (|gap| < 0.3%) | full | 868,931 | -0.0 | +2.1 | 50.5% | 48.5% | -0.25 |
-| +0.3% <= gap < +1% | full | 535,384 | +0.4 | +0.0 | 49.6% | 49.6% | 1.88 |
-| +1% <= gap < +2% | full | 171,839 | +6.3 | +4.0 | 50.7% | 50.7% | 11.54 |
-| +2% <= gap < +5% | full | 62,913 | +1.9 | -5.6 | 49.0% | 49.0% | 1.49 |
-| gap >= +5% | full | 12,685 | +23.7 | +0.0 | 49.9% | 49.9% | 5.36 |
-| gap <= -5% | last_24m | 2,759 | -25.6 | -33.8 | 47.5% | 52.4% | -2.47 |
-| -5% < gap <= -2% | last_24m | 14,564 | +25.9 | +35.4 | 55.0% | 44.7% | 9.14 |
-| -2% < gap <= -1% | last_24m | 34,543 | +23.7 | +22.6 | 54.9% | 44.7% | 17.8 |
-| -1% < gap <= -0.3% | last_24m | 87,248 | +6.6 | +8.1 | 52.2% | 47.4% | 10.46 |
-| flat (|gap| < 0.3%) | last_24m | 152,332 | -0.9 | +0.0 | 49.7% | 48.2% | -2.03 |
-| +0.3% <= gap < +1% | last_24m | 100,137 | -3.1 | -5.2 | 48.2% | 48.2% | -5.44 |
-| +1% <= gap < +2% | last_24m | 39,085 | -2.3 | -6.8 | 48.4% | 48.4% | -1.99 |
-| +2% <= gap < +5% | last_24m | 15,673 | -28.6 | -31.3 | 45.0% | 45.0% | -11.39 |
-| gap >= +5% | last_24m | 2,986 | -49.3 | -54.0 | 43.5% | 43.5% | -5.74 |
-| gap <= -5% | last_12m | 1,344 | +12.5 | +8.8 | 50.9% | 48.9% | 0.88 |
-| -5% < gap <= -2% | last_12m | 7,570 | +18.6 | +28.1 | 54.0% | 45.6% | 4.96 |
-| -2% < gap <= -1% | last_12m | 18,770 | +7.8 | +14.6 | 53.1% | 46.5% | 4.6 |
-| -1% < gap <= -0.3% | last_12m | 43,780 | +3.2 | +5.5 | 51.4% | 48.2% | 3.54 |
-| flat (|gap| < 0.3%) | last_12m | 70,409 | -0.8 | -1.6 | 49.2% | 48.1% | -1.29 |
-| +0.3% <= gap < +1% | last_12m | 49,578 | -2.8 | -7.6 | 47.6% | 47.6% | -3.38 |
-| +1% <= gap < +2% | last_12m | 23,369 | -4.4 | -12.9 | 47.1% | 47.1% | -2.91 |
-| +2% <= gap < +5% | last_12m | 9,130 | -3.9 | -12.3 | 48.0% | 48.0% | -1.21 |
-| gap >= +5% | last_12m | 1,637 | -25.5 | -33.6 | 45.8% | 45.8% | -2.2 |
+| gap <= -5% | full | 12,052 | -45.2 | -39.2 | 46.3% | 53.4% | -8.64 |
+| -5% < gap <= -2% | full | 59,588 | +20.0 | +18.4 | 52.5% | 47.1% | 14.85 |
+| -2% < gap <= -1% | full | 148,057 | +9.7 | +13.0 | 52.7% | 46.8% | 16.01 |
+| -1% < gap <= -0.3% | full | 422,305 | +2.8 | +7.8 | 52.1% | 47.3% | 10.35 |
+| flat (|gap| < 0.3%) | full | 867,930 | -0.1 | +2.1 | 50.5% | 48.5% | -0.44 |
+| +0.3% <= gap < +1% | full | 534,899 | +0.4 | +0.0 | 49.6% | 49.6% | 1.63 |
+| +1% <= gap < +2% | full | 171,812 | +6.1 | +3.9 | 50.7% | 50.7% | 11.26 |
+| +2% <= gap < +5% | full | 63,024 | +1.5 | -5.7 | 48.9% | 48.9% | 1.21 |
+| gap >= +5% | full | 12,719 | +23.6 | +0.0 | 49.9% | 49.9% | 5.34 |
+| gap <= -5% | last_24m | 2,787 | -27.1 | -34.8 | 47.4% | 52.5% | -2.62 |
+| -5% < gap <= -2% | last_24m | 14,600 | +25.3 | +34.8 | 54.9% | 44.8% | 8.94 |
+| -2% < gap <= -1% | last_24m | 34,278 | +22.6 | +21.2 | 54.6% | 45.0% | 16.92 |
+| -1% < gap <= -0.3% | last_24m | 86,985 | +6.1 | +7.5 | 52.0% | 47.5% | 9.67 |
+| flat (|gap| < 0.3%) | last_24m | 152,211 | -1.1 | +0.0 | 49.6% | 48.3% | -2.53 |
+| +0.3% <= gap < +1% | last_24m | 100,180 | -3.4 | -5.4 | 48.2% | 48.2% | -5.97 |
+| +1% <= gap < +2% | last_24m | 39,168 | -2.8 | -7.1 | 48.3% | 48.3% | -2.47 |
+| +2% <= gap < +5% | last_24m | 15,804 | -29.9 | -32.3 | 44.9% | 44.9% | -11.82 |
+| gap >= +5% | last_24m | 3,022 | -48.5 | -54.4 | 43.5% | 43.5% | -5.65 |
+| gap <= -5% | last_12m | 1,366 | +10.3 | +6.5 | 50.6% | 49.2% | 0.73 |
+| -5% < gap <= -2% | last_12m | 7,595 | +17.9 | +27.3 | 53.8% | 45.8% | 4.78 |
+| -2% < gap <= -1% | last_12m | 18,816 | +7.6 | +13.9 | 53.0% | 46.6% | 4.48 |
+| -1% < gap <= -0.3% | last_12m | 43,843 | +2.8 | +5.1 | 51.2% | 48.4% | 3.12 |
+| flat (|gap| < 0.3%) | last_12m | 69,990 | -1.1 | -1.7 | 49.2% | 48.2% | -1.69 |
+| +0.3% <= gap < +1% | last_12m | 49,496 | -3.5 | -8.2 | 47.5% | 47.5% | -4.19 |
+| +1% <= gap < +2% | last_12m | 23,405 | -5.3 | -13.4 | 47.0% | 47.0% | -3.46 |
+| +2% <= gap < +5% | last_12m | 9,232 | -6.6 | -14.1 | 47.8% | 47.8% | -2.02 |
+| gap >= +5% | last_12m | 1,664 | -27.1 | -35.5 | 45.5% | 45.5% | -2.33 |
 
 ## 2. Day two after a big close-to-close move
 
 | Condition | Period | n | Mean OC (bps) | Median (bps) | Share up | Continuation | t |
 |---|---|---|---|---|---|---|---|
-| yesterday +10% or more | full | 7,570 | -9.8 | -14.3 | 48.1% | 48.1% | -1.76 |
-| yesterday +5% to +10% | full | 37,997 | +0.3 | -1.2 | 49.5% | 49.5% | 0.18 |
-| yesterday -5% to -10% | full | 35,990 | +19.5 | +16.1 | 52.1% | 47.5% | 10.29 |
-| yesterday -10% or worse | full | 6,103 | +72.4 | +44.8 | 54.1% | 45.6% | 9.3 |
-| yesterday +10% or more | last_24m | 1,740 | -48.3 | -53.4 | 43.5% | 43.5% | -4.88 |
-| yesterday +5% to +10% | last_24m | 9,055 | +9.4 | +4.2 | 50.5% | 50.5% | 2.83 |
-| yesterday -5% to -10% | last_24m | 8,531 | +31.5 | +23.7 | 53.6% | 46.2% | 7.86 |
-| yesterday -10% or worse | last_24m | 1,488 | -3.9 | -2.4 | 49.5% | 50.3% | -0.33 |
-| yesterday +10% or more | last_12m | 843 | +29.6 | +21.2 | 52.5% | 52.5% | 1.98 |
-| yesterday +5% to +10% | last_12m | 5,505 | +22.5 | +23.1 | 53.1% | 53.1% | 5.15 |
-| yesterday -5% to -10% | last_12m | 4,702 | -7.3 | +0.0 | 49.8% | 50.0% | -1.45 |
-| yesterday -10% or worse | last_12m | 714 | -44.9 | -32.2 | 46.4% | 53.6% | -2.56 |
+| yesterday +10% or more | full | 7,604 | -9.6 | -14.3 | 48.1% | 48.1% | -1.72 |
+| yesterday +5% to +10% | full | 38,051 | +0.4 | -1.4 | 49.5% | 49.5% | 0.22 |
+| yesterday -5% to -10% | full | 36,034 | +19.6 | +16.0 | 52.1% | 47.5% | 10.31 |
+| yesterday -10% or worse | full | 6,120 | +70.8 | +43.1 | 54.0% | 45.7% | 9.1 |
+| yesterday +10% or more | last_24m | 1,775 | -47.3 | -53.4 | 43.5% | 43.5% | -4.82 |
+| yesterday +5% to +10% | last_24m | 9,108 | +9.4 | +3.9 | 50.5% | 50.5% | 2.82 |
+| yesterday -5% to -10% | last_24m | 8,582 | +31.5 | +23.2 | 53.6% | 46.2% | 7.84 |
+| yesterday -10% or worse | last_24m | 1,507 | -8.8 | -4.1 | 49.2% | 50.6% | -0.74 |
+| yesterday +10% or more | last_12m | 867 | +27.3 | +20.3 | 52.1% | 52.1% | 1.86 |
+| yesterday +5% to +10% | last_12m | 5,557 | +22.8 | +22.6 | 53.0% | 53.0% | 5.19 |
+| yesterday -5% to -10% | last_12m | 4,744 | -7.1 | -1.1 | 49.7% | 50.1% | -1.4 |
+| yesterday -10% or worse | last_12m | 732 | -55.1 | -45.7 | 45.6% | 54.4% | -3.15 |
 
 ## 3. Three-day moves
 
 | Condition | Period | n | Mean OC (bps) | Median (bps) | Share up | t |
 |---|---|---|---|---|---|---|
-| 3-day return <= -15% | full | 8,379 | +34.3 | +12.2 | 51.0% | 5.06 |
-| 3-day return -15% to -10% | full | 20,039 | +18.9 | +9.8 | 51.1% | 6.69 |
-| 3-day return >= +15% | full | 11,265 | +0.3 | -4.1 | 49.3% | 0.08 |
-| 3-day return <= -15% | last_24m | 2,103 | +13.3 | -5.7 | 49.4% | 1.16 |
-| 3-day return -15% to -10% | last_24m | 4,978 | +22.8 | +0.0 | 49.9% | 3.75 |
-| 3-day return >= +15% | last_24m | 2,591 | +9.0 | +4.2 | 50.5% | 1.17 |
-| 3-day return <= -15% | last_12m | 932 | +26.7 | +17.3 | 51.3% | 1.9 |
-| 3-day return -15% to -10% | last_12m | 2,587 | -10.5 | -14.8 | 47.4% | -1.48 |
-| 3-day return >= +15% | last_12m | 1,500 | +22.2 | +18.4 | 52.7% | 2.12 |
+| 3-day return <= -15% | full | 8,394 | +34.3 | +12.0 | 50.9% | 5.06 |
+| 3-day return -15% to -10% | full | 20,074 | +18.6 | +9.5 | 51.1% | 6.59 |
+| 3-day return >= +15% | full | 11,319 | +0.6 | -4.1 | 49.3% | 0.15 |
+| 3-day return <= -15% | last_24m | 2,111 | +12.6 | -6.7 | 49.3% | 1.1 |
+| 3-day return -15% to -10% | last_24m | 5,005 | +21.4 | +0.0 | 49.8% | 3.53 |
+| 3-day return >= +15% | last_24m | 2,646 | +9.7 | +4.7 | 50.6% | 1.26 |
+| 3-day return <= -15% | last_12m | 949 | +27.0 | +12.8 | 51.1% | 1.91 |
+| 3-day return -15% to -10% | last_12m | 2,619 | -12.8 | -16.1 | 47.2% | -1.81 |
+| 3-day return >= +15% | last_12m | 1,537 | +22.5 | +17.9 | 52.6% | 2.15 |
 
 ## 4. 20-day momentum deciles
 
 | Condition | Period | n | Mean OC (bps) | Median (bps) | Share up | t |
 |---|---|---|---|---|---|---|
-| momentum top decile (20d) | full | 230,244 | +2.0 | +2.6 | 50.4% | 4.23 |
-| momentum bottom decile (20d) | full | 230,456 | +2.8 | +1.8 | 50.2% | 5.47 |
-| momentum top decile (20d) | last_24m | 45,090 | +2.3 | +2.4 | 50.4% | 1.91 |
-| momentum bottom decile (20d) | last_24m | 45,090 | +0.6 | +0.0 | 49.7% | 0.48 |
-| momentum top decile (20d) | last_12m | 22,590 | +4.9 | +0.9 | 50.1% | 2.74 |
-| momentum bottom decile (20d) | last_12m | 22,590 | -2.5 | -1.5 | 49.4% | -1.39 |
+| momentum top decile (20d) | full | 230,087 | +2.0 | +2.5 | 50.4% | 4.25 |
+| momentum bottom decile (20d) | full | 230,316 | +2.7 | +1.7 | 50.2% | 5.19 |
+| momentum top decile (20d) | last_24m | 45,072 | +2.0 | +1.8 | 50.2% | 1.67 |
+| momentum bottom decile (20d) | last_24m | 45,072 | -0.2 | -0.4 | 49.6% | -0.19 |
+| momentum top decile (20d) | last_12m | 22,572 | +4.7 | +0.0 | 49.9% | 2.58 |
+| momentum bottom decile (20d) | last_12m | 22,572 | -3.6 | -1.9 | 49.4% | -2.0 |
 
 ## 5. Base rate: share of tradable stock-days that closed above the open
 
 | Year | n | Share up | Mean OC (bps) |
 |---|---|---|---|
-| 2016 | 176,753 | 52.8% | +10.4 |
-| 2017 | 197,552 | 51.4% | +2.6 |
-| 2018 | 201,342 | 49.4% | -6.4 |
-| 2019 | 205,494 | 52.7% | +6.7 |
-| 2020 | 210,532 | 49.7% | +0.6 |
-| 2021 | 216,688 | 50.2% | +0.7 |
-| 2022 | 218,418 | 50.0% | +1.2 |
-| 2023 | 219,501 | 51.5% | +6.0 |
-| 2024 | 224,317 | 50.3% | -0.9 |
-| 2025 | 223,855 | 51.0% | +4.2 |
-| 2026 | 199,548 | 49.4% | -0.3 |
+| 2016 | 176,521 | 52.8% | +10.4 |
+| 2017 | 197,301 | 51.4% | +2.6 |
+| 2018 | 201,091 | 49.4% | -6.4 |
+| 2019 | 205,242 | 52.6% | +6.7 |
+| 2020 | 210,279 | 49.6% | +0.6 |
+| 2021 | 216,436 | 50.2% | +0.7 |
+| 2022 | 218,167 | 50.0% | +1.2 |
+| 2023 | 219,251 | 51.5% | +6.0 |
+| 2024 | 224,065 | 50.3% | -0.9 |
+| 2025 | 223,768 | 51.0% | +4.2 |
+| 2026 | 200,265 | 49.3% | -1.0 |
 
 ## 6. SPY conditionals
 
 | Condition | Period | n | Mean OC (bps) | Median (bps) | Share up | t |
 |---|---|---|---|---|---|---|
-| SPY all sessions | full | 2,736 | +2.0 | +5.3 | 53.9% | 1.27 |
-| SPY gap >= +0.5% | full | 431 | +9.3 | +22.3 | 60.1% | 1.87 |
+| SPY all sessions | full | 2,737 | +1.9 | +5.2 | 53.9% | 1.2 |
+| SPY gap >= +0.5% | full | 432 | +8.6 | +22.3 | 60.0% | 1.71 |
 | SPY gap <= -0.5% | full | 349 | +5.7 | +6.8 | 53.6% | 0.83 |
 | SPY after 3 up days | full | 439 | +1.4 | +4.5 | 52.8% | 0.55 |
 | SPY after a -1% day | full | 299 | +8.3 | +1.0 | 51.8% | 1.07 |
-| SPY all sessions | last_24m | 501 | +1.5 | +4.5 | 52.3% | 0.36 |
-| SPY gap >= +0.5% | last_24m | 79 | -7.0 | -5.6 | 46.8% | -0.69 |
-| SPY gap <= -0.5% | last_24m | 67 | +19.2 | +0.9 | 52.2% | 0.93 |
+| SPY all sessions | last_24m | 501 | +0.7 | +3.2 | 52.1% | 0.17 |
+| SPY gap >= +0.5% | last_24m | 80 | -10.6 | -6.4 | 46.2% | -1.0 |
+| SPY gap <= -0.5% | last_24m | 66 | +18.1 | +0.7 | 51.5% | 0.86 |
 | SPY after 3 up days | last_24m | 82 | +2.0 | +1.7 | 51.2% | 0.33 |
 | SPY after a -1% day | last_24m | 57 | +40.2 | +7.4 | 59.7% | 1.71 |
-| SPY all sessions | last_12m | 251 | -0.9 | +2.6 | 51.4% | -0.21 |
-| SPY gap >= +0.5% | last_12m | 43 | -1.7 | -7.2 | 44.2% | -0.14 |
+| SPY all sessions | last_12m | 251 | -2.2 | +0.9 | 51.0% | -0.49 |
+| SPY gap >= +0.5% | last_12m | 44 | -8.3 | -8.5 | 43.2% | -0.6 |
 | SPY gap <= -0.5% | last_12m | 31 | -1.1 | -2.6 | 48.4% | -0.08 |
 | SPY after 3 up days | last_12m | 35 | +4.2 | +7.7 | 57.1% | 0.51 |
 | SPY after a -1% day | last_12m | 27 | +1.2 | -9.8 | 48.1% | 0.08 |
@@ -140,6 +140,6 @@
 | 2023 | 250 | 58.8% | +7.3 |
 | 2024 | 252 | 53.6% | +0.5 |
 | 2025 | 250 | 52.4% | +3.9 |
-| 2026 | 222 | 50.9% | -0.8 |
+| 2026 | 223 | 50.7% | -2.1 |
 
 _Current index membership (survivorship bias favours longs slightly). Research output, not investment advice._
